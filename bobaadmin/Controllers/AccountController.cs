@@ -29,7 +29,7 @@ namespace bobaadmin
             }
             else
             {
-                return Json(new { status = false, message = "Invalid Email!" });
+                return Json(new { status = false, message = "Invalid User!" });
             }
         }
 
