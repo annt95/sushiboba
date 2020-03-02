@@ -78,7 +78,7 @@
     $.ajax(
     {
       type: "POST",
-      url: '@Url.Action("Validate", "Account")',
+      url: '@Url.Action("checkLogin", "Account")',
       data: {
         email: $('#email').val(),
         password: $('#password').val()
