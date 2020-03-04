@@ -6,7 +6,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+
+
+
 
 namespace bobaadmin
 {
@@ -14,17 +18,25 @@ namespace bobaadmin
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options =>
+            services.Configure<CookiePolicyOptions>(options =>
             {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/Login"; });
-            services.AddMvc().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizeFolder("/");
-                options.Conventions.AllowAnonymousToPage("/Login");
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizePage("/Contact");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            #region snippet1
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+            #endregion
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -32,10 +44,23 @@ namespace bobaadmin
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+            app.UseCookiePolicy();
+
+            // Call UseAuthentication before calling UseMVC.
+            #region snippet2
+            app.UseAuthentication();
+            #endregion
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -43,5 +68,6 @@ namespace bobaadmin
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }
