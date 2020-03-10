@@ -6,9 +6,21 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\bower_components\**" />
+    <Compile Remove="wwwroot\js\plugins\fpt\ckeditor\plugins\preview\**" />
+    <Compile Remove="wwwroot\js\plugins\fpt\ckeditor\skins\black\**" />
+    <Compile Remove="wwwroot\js\plugins\fpt\ckfinder\core\connector\aspx\Images\2015\Apps Windowsphone\**" />
     <Content Remove="wwwroot\bower_components\**" />
+    <Content Remove="wwwroot\js\plugins\fpt\ckeditor\plugins\preview\**" />
+    <Content Remove="wwwroot\js\plugins\fpt\ckeditor\skins\black\**" />
+    <Content Remove="wwwroot\js\plugins\fpt\ckfinder\core\connector\aspx\Images\2015\Apps Windowsphone\**" />
     <EmbeddedResource Remove="wwwroot\bower_components\**" />
+    <EmbeddedResource Remove="wwwroot\js\plugins\fpt\ckeditor\plugins\preview\**" />
+    <EmbeddedResource Remove="wwwroot\js\plugins\fpt\ckeditor\skins\black\**" />
+    <EmbeddedResource Remove="wwwroot\js\plugins\fpt\ckfinder\core\connector\aspx\Images\2015\Apps Windowsphone\**" />
     <None Remove="wwwroot\bower_components\**" />
+    <None Remove="wwwroot\js\plugins\fpt\ckeditor\plugins\preview\**" />
+    <None Remove="wwwroot\js\plugins\fpt\ckeditor\skins\black\**" />
+    <None Remove="wwwroot\js\plugins\fpt\ckfinder\core\connector\aspx\Images\2015\Apps Windowsphone\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -150,9 +150,10 @@ namespace bobaadmin
             }
         }
 
-        public ActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Remove("username");
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
 
