@@ -1,0 +1,5 @@
+﻿namespace AdminTemplate.Administration {
+    export interface RolePermissionListResponse extends Serenity.ListResponse<string> {
+    }
+}
+

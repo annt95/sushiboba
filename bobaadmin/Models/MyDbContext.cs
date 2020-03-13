@@ -16,7 +16,7 @@ namespace bobaadmin.Models
         }
 
         public virtual DbSet<Admins> Admins { get; set; }
-
+        public DbQuery<Menu> MenuView { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

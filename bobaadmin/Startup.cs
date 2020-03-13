@@ -65,8 +65,8 @@ namespace bobaadmin
                 routes
                 .MapRoute(name: "Ajax", template: "Ajax/{Controller}/{action}")
                 
-                .MapRoute(name: "Sushi", template: "sushi", defaults: new { controller = "Menu", action = "Sushi" })
-                .MapRoute(name: "Milktea", template: "milktea", defaults: new { controller = "Menu", action = "Milktea" })
+                .MapRoute(name: "Sushi", template: "/menu/sushi", defaults: new { controller = "Menu", action = "Sushi" })
+                .MapRoute(name: "Milktea", template: "/menu/milktea", defaults: new { controller = "Menu", action = "Milktea" })
                 .MapRoute(name: "Menu", template: "menu", defaults: new { controller = "Menu", action = "Index" })
                 .MapRoute(
                     name: "default",

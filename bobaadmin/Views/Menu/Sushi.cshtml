@@ -1,18 +1,19 @@
-﻿    <link href="~/Content/Admin/js/plugins/ui/kendo-ui/styles/kendo.common-material.min.css" rel="stylesheet" />
-    <link href="~/Content/Admin/js/plugins/ui/kendo-ui/styles/kendo.material.min.css" rel="stylesheet" />
-    <link href="~/Content/Admin/js/plugins/ui/kendo-ui/styles/kendo.material.mobile.min.css" rel="stylesheet" />
-    <style>
-        .k-grid td {
-            padding: 5px;
-        }
-    </style>
-
-    <!-- Theme JS files -->
-    <script type="text/javascript" src="~/Content/Admin/js/plugins/tables/datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="~/Content/Admin/js/plugins/forms/selects/select2.min.js"></script>
-    <script type="text/javascript" src="~/Content/Admin/js/core/app.js"></script>
-    <!-- /kendo JS files -->
-    <script type="text/javascript" src="~/Content/Admin/js/plugins/ui/kendo-ui/js/kendo.all.min.js"></script>
+﻿<link href="~/js/plugins/ui/kendo-ui/styles/kendo.common-material.min.css" rel="stylesheet" />
+<link href="~/js/plugins/ui/kendo-ui/styles/kendo.material.min.css" rel="stylesheet" />
+<link href="~/js/plugins/ui/kendo-ui/styles/kendo.material.mobile.min.css" rel="stylesheet" />
+<style>
+    .k-grid td {
+        padding: 5px;
+    }
+</style>
+<script src="~/js/jquery-3.4.1.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<!-- Theme JS files -->
+<script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="~/js/core/app.js"></script>
+<!-- /kendo JS files -->
+<script type="text/javascript" src="~/js/plugins/ui/kendo-ui/js/kendo.all.min.js"></script>
 
 <section class="content-header">
     <h1>
@@ -26,37 +27,37 @@
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">Bài viết</h5>
-            
+
         </div>
         <div class="panel-body">
             <a href="/New" class="btn btn-primary">Thêm mới</a>
         </div>
 
-        
-        @*<div class="box-body">
-            <div id="postGrid" data-url="@Url.Action("GetListKendoUI")"></div>
-            <script id="action-template" type="text/x-kendo-template">
-                <div class="pull-right kendo-grid-action">
 
-                    <a class="btn bg-blue btn-lg" style="padding-top:3px; padding-bottom:3px;" href="/Admin/Article/EditForm?id=#:data.ID#" title="Sửa">
-                        <i class="fa icon-pencil7"></i>
-                    </a>
-                </div>
-            </script>
-        </div>*@
+        <div class="box-body">
+                <div id="postGrid" data-url="@Url.Action("GetListKendoUI")"></div>
+                <script id="action-template" type="text/x-kendo-template">
+                    <div class="pull-right kendo-grid-action">
+
+                        <a class="btn bg-blue btn-lg" style="padding-top:3px; padding-bottom:3px;" href="/Admin/Article/EditForm?id=#:data.ID#" title="Sửa">
+                            <i class="fa icon-pencil7"></i>
+                        </a>
+                    </div>
+                </script>
+            </div>
     </div>
     <!-- /basic datatable -->
 </section>
 <script>
     (function ($) {
         $(document).ready(function () {
-            
+
             $("#postGrid").kendoGrid({
                 dataSource: {
                     serverPaging: true,
                     serverSorting: true,
                     serverFiltering: true,
-                    sort: ({ field: "DateCreated", dir: "desc" }),
+                    //sort: ({ field: "DateCreated", dir: "desc" }),
                     pageSize: 10,
                     transport: {
                         read: {
@@ -69,7 +70,8 @@
                             return JSON.stringify(options);
                         }
                     },
-                    schema: {
+                    schema:
+                    {
                         data: "Data",
                         total: "Total",
                         model: {
@@ -101,12 +103,13 @@
                 resizable: true,
                 reorderable: true,
                 columns: [
-                    {
-                        field: "ID",
-                        title: "ID",
-                        attributes: { style:"text-align:center" },
-                        width: 75
-                    }, @*{
+                    //{
+                    //    field: "ID",
+                    //    title: "ID",
+                    //    attributes: { style:"text-align:center" },
+                    //    width: 75
+                    //},
+                    @*{
                         field: "PictureUrl",
                         title: "Hình đại diện",
                         width: 125,
@@ -120,9 +123,10 @@
                                 return "";
                             }
                         }
-                    },*@ {
-                        field: "Title",
-                        title: "Tiêu đề",
+                    },*@ 
+                    {
+                        field: "name",
+                        title: "Tên",
                         width: 200,
                         template: function (dataItem) {
                             if (!dataItem.IsShow)
@@ -179,7 +183,7 @@
                             }
                             return '<a target="_blank" href="' + urlNew + '" title="Review">Review</a>'
                         }
-                    
+
                     }, {
                         field: "IsShow",
                         title: "Hiển thị",
@@ -202,7 +206,7 @@
                     }
                 ],
                 dataBound: function (e) {
-                    
+
                     var grid = $("#postGrid").data("kendoGrid");
                     for (var i = 0; i < grid.columns.length; i++) {
                         grid.autoFitColumn(i);
