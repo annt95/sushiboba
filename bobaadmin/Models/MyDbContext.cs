@@ -16,7 +16,7 @@ namespace bobaadmin.Models
         }
 
         public virtual DbSet<Admins> Admins { get; set; }
-        public DbQuery<Menu> MenuView { get; set; }
+        public virtual DbQuery<Menu> vw_menuadmin { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -28,7 +28,7 @@ namespace bobaadmin.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
-
+            modelBuilder.Query<Menu>().ToView("vw_menuadmin");
             modelBuilder.Entity<Admins>(entity =>
             {
                 entity.ToTable("admins");

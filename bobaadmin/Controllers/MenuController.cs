@@ -10,7 +10,7 @@ namespace bobaadmin
 {
     public class MenuController : Controller
     {
-        protected MyDbContext dbct;
+        MyDbContext db = new MyDbContext();
         public IActionResult Index()
         {
             return View();
@@ -28,6 +28,7 @@ namespace bobaadmin
             var posts = GetListKendoUI().Where(s => s.issushi == true);
             var data = posts.Select(t => new
             {
+                t.id,
                 t.name,
                 t.description,
                 t.images,
@@ -43,17 +44,52 @@ namespace bobaadmin
         //{
         //    var data = 
         //}
-        public IQueryable<Menu> GetListKendoUI()
+        private IQueryable<Menu> GetListKendoUI()
         {
-            return dbct.MenuView;
+            var results = db.vw_menuadmin;
+            return results;
         }
-        //public IQueryable<Menu> GetListKendoUI(bool issushi)
-        //{
-
-        //    var data = dbct.LoadStoredProc("SelectMenu")
-        //               .WithSqlParam("@issushi", issushi)
-        //               .ExecuteStoredProc<Menu>();
-        //    return data;
-        //}
+        public ActionResult EditForm(int id = 0, string renew = null)
+        {
+            //var NumberRecord = WebConfig.NumberRecord;
+            //var NumberRecordCategory = WebConfig.NumberRecordCategory;
+            int total = 0;
+            var obj = new AdminModel();
+            if (id > 0)
+            {
+                obj = articleRepository.GetArticleById(id);
+                ViewBag.AllowEdit = CheckEditCTV(obj);
+                if (obj.NewsItem != null && obj.NewsItem.EventID != null)
+                {
+                    var eventRef = eventRepository.GetEventsById(obj.NewsItem.EventID.Value);
+                    obj.listEvents = new List<EventItems>();//eventRepository.GetList(out total, 0, NumberRecord, "ID", true, false);
+                    if (eventRef != null)
+                        obj.listEvents.Add(eventRef);
+                }
+                if (obj.NewsItem != null && renew != null)
+                {
+                    var authorID = (Guid)Membership.GetUser(User.Identity.Name).ProviderUserKey;
+                    var newid = articleRepository.GetDraft(authorID);
+                    obj.NewsItem.OldID = obj.NewsItem.ID;
+                    obj.NewsItem.ID = newid.NewsItem.ID;
+                    obj.NewsItem.TitleAscii = obj.NewsItem.Title.Trim().GetSeName();
+                    obj.NewsItem.IsRenew = true;
+                }
+            }
+            else
+            {
+                var authorID = (Guid)Membership.GetUser(User.Identity.Name).ProviderUserKey;
+                obj = articleRepository.GetDraft(authorID);
+                obj.listEvents = new List<EventItems>();//eventRepository.GetList(out total, 0, NumberRecord, "ID", true, false);
+            }
+            if (obj.NewsItem == null)
+                return HttpNotFound();
+            obj.listCategory = articleTypeRepository.GetList(out total, 0, NumberRecordCategory, "ID", false, false);
+            obj.listCampaign = articleRepository.GetListCampaign();
+            obj.listProductRef = GetListProductReferent(id.ToString());
+            obj.listTagsRef = GetListTagsReferent(id.ToString());
+            obj.listNewsRef = GetListNewsReferent(id.ToString());
+            return View(obj);
+        }
     }
 }

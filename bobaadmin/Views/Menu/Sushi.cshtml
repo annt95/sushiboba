@@ -39,7 +39,7 @@
                 <script id="action-template" type="text/x-kendo-template">
                     <div class="pull-right kendo-grid-action">
 
-                        <a class="btn bg-blue btn-lg" style="padding-top:3px; padding-bottom:3px;" href="/Admin/Article/EditForm?id=#:data.ID#" title="Sửa">
+                        <a class="btn bg-blue btn-lg" style="padding-top:3px; padding-bottom:3px;" href="/Admin/Article/EditForm?id=#:data.id#" title="Sửa">
                             <i class="fa icon-pencil7"></i>
                         </a>
                     </div>
@@ -75,19 +75,18 @@
                         data: "Data",
                         total: "Total",
                         model: {
-                            id: "ID",
+                            id: "id",
                             fields: {
-                                ID: { type: "number" },
-                                PictureUrl: {},
-                                Title: {},
-                                TitleAscii: {},
-                                CategoryID: {},
-                                CategoryName: {},
-                                CategoryNameAscii: {},
-                                DateCreated: { type: "date" },
-                                UserName: {},
-                                IsHot: { type: "boolean" },
-                                IsShow: { type: "boolean" }
+                                name: {},
+                                images: {},
+                                description: {},
+                                price: {},
+                                //CategoryName: {},
+                                //CategoryNameAscii: {},
+                                //DateCreated: { type: "date" },
+                                //UserName: {},
+                                //IsHot: { type: "boolean" },
+                                //IsShow: { type: "boolean" }
                             }
                         }
                     }
@@ -103,107 +102,47 @@
                 resizable: true,
                 reorderable: true,
                 columns: [
-                    //{
-                    //    field: "ID",
-                    //    title: "ID",
-                    //    attributes: { style:"text-align:center" },
-                    //    width: 75
-                    //},
-                    @*{
-                        field: "PictureUrl",
+                    {
+                        field: "id",
+                        title: "ID",
+                        attributes: { style:"text-align:center" }
+                    },
+                    {
+                        field: "name",
+                        title: "Tên"
+                    }, {
+                        field: "description",
+                        title: "Chi Tiết",
+                        filterable: false,
+                        sortable: false
+                    }, {
+                        field: "price",
+                        title: "Giá",
+                        template: function (dataItem) {
+                                return "<center><bold>" + dataItem.price + "$</bold></center>";
+                        }
+                    }, 
+                    {
+                        field: "images",
                         title: "Hình đại diện",
-                        width: 125,
                         filterable: false,
                         sortable: false,
                         template: function (dataItem) {
                             try {
-                                return '<img style="max-height:100px;max-width:100px;" src="@FPTShopNews_Utility.WebConfig.URLThumbsImage' + dataItem.PictureUrl + '" />';
+                                return '<img style="max-height:200px;width:400px;" src="' + dataItem.images + '" />';
                             }
                             catch (ex) {
                                 return "";
                             }
                         }
-                    },*@ 
+                    },
                     {
-                        field: "name",
-                        title: "Tên",
-                        width: 200,
-                        template: function (dataItem) {
-                            if (!dataItem.IsShow)
-                            {
-                                return "<strike>" + dataItem.Title + "</strike>";
-                            }
-                            else
-                                return dataItem.Title;
-                        }
-                    }, {
-                        field: "CategoryName",
-                        title: "Danh mục",
-                        width: 180
-                    }, @*{
-                        field: "UserName",
-                        title: "Người đăng"
-                    },*@ {
-                        field: "DateCreated",
-                        title: "Ngày đăng",
-                        filterable: false,
-                        width: 140,
-                        template: "#= kendo.toString(kendo.parseDate(DateCreated, 'yyyy/MM/dd'), 'dd/MM/yyyy HH:mm') #"
-                    }, {
-                        field: "IsHot",
-                        title: "Tin Hot",
-                        attributes: { style: "text-align:center" },
-                        width: 100,
-                        template: function (dataItem) {
-                            if (dataItem.IsHot)
-                            {
-                                return '<span class="label label-danger">Tin Hot</span>';
-                            }
-                            else
-                            {
-                                return '<span class="label label-info">Tin thường</span>';
-                            }
-                        }
-                    }, {
-                        title: "Review",
-                        width: 75,
-                        template: function (dataItem) {
-                            var urlNew;
-                            switch(dataItem.CategoryID)
-                            {
-                                case 98:
-                                    urlNew = 'http://fstudiobyfpt.com.vn/tin-tuc/' + dataItem.TitleAscii;
-                                    break;
-                                case 99:
-                                    urlNew = 'http://fstudiobyfpt.com.vn/khuyen-mai/' + dataItem.TitleAscii;
-                                    break;
-                                default:
-                                    urlNew = 'https://fptshop.com.vn/tin-tuc/' + dataItem.CategoryNameAscii.toLowerCase() + '/' + dataItem.TitleAscii;
-                                    break;
-                            }
-                            return '<a target="_blank" href="' + urlNew + '" title="Review">Review</a>'
-                        }
-
-                    }, {
-                        field: "IsShow",
-                        title: "Hiển thị",
-                        attributes: { style: "text-align:center" },
-                        width: 100,
-                        template: function (dataItem) {
-                            if (dataItem.IsShow) {
-                                return '<span class="label label-success">Hiển thị</span>';
-                            }
-                            else {
-                                return '<span class="label label-default">Ẩn</span>';
-                            }
-                        }
-                    }, {
                         title: "Sửa",
                         template: $("#action-template").html(),
                         width: 80,
                         filterable: false,
                         sortable: false
-                    }
+                    }                    
                 ],
                 dataBound: function (e) {
 

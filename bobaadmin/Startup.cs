@@ -30,7 +30,7 @@ namespace bobaadmin
                     options.Conventions.AuthorizePage("/Contact");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
             #region snippet1
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
