@@ -1,0 +1,877 @@
+﻿
+@model bobaadmin.Models.AdminModel
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<!-- Theme JS files -->
+<script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/styling/switchery.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/styling/switch.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/tags/tagsinput.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/tags/tokenfield.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/inputs/speakingurl.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/inputs/slugify.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/ui/prism.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/uploaders/fileinput/plugins/purify.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/uploaders/fileinput/plugins/sortable.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/uploaders/fileinput/fileinput.min.js"></script>
+
+<script type="text/javascript" src="~/js/plugins/notifications/jgrowl.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/ui/moment/moment.min.js"></script>
+<script type="text/javascript" src="~/js/plugins/pickers/daterangepicker.js"></script>
+
+<script type="text/javascript" src="~/js/plugins/notifications/sweet_alert.min.js"></script>
+
+<script src="~/js/plugins/fpt/ckeditor/ckeditor.js"></script>
+<script src="~/js/plugins/fpt/ckfinder/ckfinder.js?v=1"></script>
+
+<script type="text/javascript" src="~/js/core/app.js"></script>
+<script type="text/javascript" src="~/js/core/alertchanges.js?v=2"></script>
+<script type="text/javascript" src="~/js/pages/datatables_basic.js"></script>
+<script type="text/javascript" src="~/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="~/js/pages/form_checkboxes_radios.js"></script>
+<script type="text/javascript" src="~/js/pages/picker_date.js"></script>
+<script type="text/javascript" src="~/js/pages/components_modals.js"></script>
+<!-- /theme JS files -->
+
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace('Details', {
+            customConfig: 'config.js',
+            toolbar: 'Full',
+            height: 250,
+            extraPlugins: 'youtube,fptshop,fptShopCompare',
+            filebrowserBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?newsid=@Model.AdminsItem.Id',
+            filebrowserImageBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?Type=Images&newsid=@Model.AdminsItem.Id',
+        });
+
+    //createCKFider('ImagesUrl', 162);
+    });
+</script>
+<!-- Page header -->
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            @*<h4><a href="@Url.Action("Index")"><i class="icon-arrow-left52 position-left"></i></a> <span class="text-semibold">@(Model.NewsItem != null ? "Chỉnh sửa chi tiết bài viết" : "Tạo mới bài viết")</span></h4>*@
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+<div class="content">
+    @*@if (Model.NewsItem != null && !Model.NewsItem.IsDraft)
+        {
+            <partial name="../Menu/EditForm.Edit.cshtml" />
+
+        }
+        else
+        {
+            <partial name="../Menu/EditForm.Add.cshtml" />
+
+        }*@
+    @*@Html.Partial("EditForm.Edit", Model);*@
+    @*@Html.Partial("EditForm.Add", Model);*@
+</div>
+<script>
+    function updateEditor() {
+        for (var name in CKEDITOR.instances)
+            CKEDITOR.instances[name].updateElement();
+    }
+
+    jQuery.validator.addMethod("noSpace", function (value, element) {
+        return value.trim() != "";
+    }, "No space please and don't leave it empty");
+
+    $("#actionForm").validate({
+        rules: {
+            Title:
+            {
+                required: true,
+                minlength: 3,
+                maxlength: 255
+            },
+            PictureID:
+            {
+                required: true,
+                min: 1
+            },
+            CategoryID:
+            {
+                required: true,
+                min: 1
+            },
+            SEOTitle:
+            {
+                required: true,
+                minlength: 3,
+                maxlength: 65
+            },
+            SEODescription:
+            {
+                required: true,
+                minlength: 3,
+                maxlength: 300
+            },
+            SEOKeyword:
+            {
+                //required: true,
+                //minlength: 3,
+                maxlength: 255
+            },
+            Description:
+            {
+                required: true,
+                minlength: 50,
+                //maxlength: 255
+            },
+            Details:
+            {
+                required: true,
+                minlength: 50,
+                //maxlength: 255
+            },
+        },
+        messages: {
+            Title: {
+                required: "Bạn cần nhập đầy đủ tiêu đề bài viết",
+                minlength: "Tiêu đề bài viết của bạn quá ngắn",
+                maxlength: "Tiêu đề bài viết của bạn quá dài",
+                noSpace: "Nhập tiêu đề sai định dạng"
+            },
+            CategoryID: {
+                required: "Bạn cần chọn Danh mục",
+                min: "Bạn cần chọn Danh mục"
+            },
+            PictureID: {
+                required: "Bạn cần chọn Hình đại diện",
+                min: "Bạn cần chọn Hình đại diện"
+            },
+            SEOTitle: {
+                required: "Bạn cần nhập SEO Title",
+                minlength: "SEO Title quá ngắn",
+                maxlength: "SEO Title quá dài. Giới hạn 65 ký tự.",
+                noSpace: "SEO Title sai định dạng"
+            },
+            SEODescription: {
+                required: "Bạn cần nhập SEO Description",
+                minlength: "SEO Description quá ngắn",
+                maxlength: "SEO Description quá dài. Giới hạn 300 ký tự.",
+                noSpace: "SEO Description sai định dạng"
+            },
+            SEOKeyword: {
+                //required: "Bạn cần nhập SEO Keyword",
+                //minlength: "SEO Keyword quá ngắn",
+                maxlength: "SEO Keyword quá dài. Giới hạn 255 ký tự.",
+                //noSpace: "SEO Keyword sai định dạng"
+            },
+            Description: {
+                required: "Bạn cần nhập Mô tả",
+                minlength: "Mô tả quá ngắn. Ít nhất 50 ký tự.",
+                //maxlength: "SEO Keyword quá dài. Giới hạn 255 ký tự.",
+                noSpace: "Mô tả sai định dạng"
+            },
+            Details: {
+                required: "Bạn cần nhập nội dung bài viết",
+                minlength: "Nội dung bài viết quá ngắn. Ít nhất 50 ký tự.",
+                //maxlength: "SEO Keyword quá dài. Giới hạn 255 ký tự.",
+                noSpace: "Nội dung bài viết sai định dạng"
+            },
+        },
+        submitHandler: function () { //onSubmit
+            var buttonSubmit = $('button[type="submit"]');
+            if ($('#IsShow').val() == 'false' && $('#LinkRef').length > 0 && $('#LinkRef').val().length == 0) {
+                if (!confirm("Chưa nhập redirect khi ẩn bài viết. Bạn có muốn tiếp tục lưu.")) {
+                    return false;
+                }
+            }
+            buttonSubmit.attr('disabled', 'disabled');
+            updateEditor();
+            if ($("#CategoryID").val() == 0) {
+                swal({
+                    title: "Thêm mới/Cập nhật",
+                    text: "Thất bại! Xin chọn danh mục.",
+                    confirmButtonColor: "#EF5350",
+                    type: "error"
+                });
+            } else if ($("#PictureID").val() == 0) {
+                swal({
+                    title: "Thêm mới/Cập nhật",
+                    text: "Thất bại! Xin chọn hình đại diện.",
+                    confirmButtonColor: "#EF5350",
+                    type: "error"
+                });
+            } else if ($("#Details").val().trim().length == 0) {
+                swal({
+                    title: "Thêm mới/Cập nhật",
+                    text: "Thất bại! Xin nhập mô tả chi tiết.",
+                    confirmButtonColor: "#EF5350",
+                    type: "error"
+                });
+            } else if ($('#LinkRef').length > 0 && $("#LinkRef").val().length > 0 && $("#LinkRef").val().indexOf('fptshop.com.vn') === -1) {
+                swal({
+                    title: "Thêm mới/Cập nhật",
+                    text: "Chỉ redirect trong trang fptshop.com.vn.",
+                    confirmButtonColor: "#EF5350",
+                    type: "error"
+                });
+            } else {
+                $.post("/Admin/Article/Action", $("#actionForm").serialize(), function (data) {
+                    if (data.Error) {
+                        var message = 'Thất bại!';
+                        if (data.Message != null && data.Message != '') {
+                            message = data.Message;
+                        }
+                        swal({
+                            title: "Thêm mới/Cập nhật",
+                            text: message,
+                            confirmButtonColor: "#EF5350",
+                            type: "error"
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Thêm mới/Cập nhật ",
+                            text: "Thành công!",
+                            confirmButtonColor: "#66BB6A",
+                            type: "success"
+                        }, function (result) {
+                            window.location.href = "/Admin/Article/EditForm?id=" + data.NewsId;
+                        });
+
+                        //setTimeout(function () {
+                        //    window.location.href = "/Admin/Article/EditForm?id=" + data.NewsId;
+                        //}, 2000);
+                    }
+                });
+            }
+            //console.log($("#actionForm").serialize());
+            buttonSubmit.removeAttr('disabled');
+        }
+    });
+
+    var url = $(".auto-gen-url");
+    //var URLHasID = $("input[name='URLHasID']");
+    if (url != null) {
+        //if (URLHasID != null)
+        //{
+        //    URLHasID.change(function () {
+        //        $("[name='" + url.data("url-name") + "'").trigger("input");
+        //    });
+        //}
+        $("[name='" + url.data("url-name") + "'").on('input', function () {
+            //var id = "";
+            //if (URLHasID.is(':checked') == true) {
+            //    id = "-" + $("input[name='ID']").val();
+            //}
+            url.val(getSlug($(this).val()));
+        });
+    }
+
+    $('.listCategoryType').select2().on("change", function (e) {
+        $('#CategoryID').val($(".listCategoryType").find(":selected").data("id"));
+        console.log($(".listCategoryType").find(":selected").data("id"));  // 0 or 1 on change
+    });
+    $('.listCampaign').select2().on("change", function (e) {
+        $('#CampaignID').val($(".listCampaign").find(":selected").data("id"));
+        console.log($(".listCampaign").find(":selected").data("id"));  // 0 or 1 on change
+    });
+    $('.listEvent').select2().on("change", function (e) {
+        $('#EventID').val($(".listEvent").find(":selected").data("id"));
+        console.log($(".listEvent").find(":selected").data("id"));  // 0 or 1 on change
+    });
+
+    $('.btnIsShow').on("change", function (e) {
+        var clickCheckbox = document.querySelector('.btnIsShow')
+        $('#IsShow').val(clickCheckbox.checked);
+        if (clickCheckbox.checked) {
+            $('.statusLabel').text('Hiển thị');
+            //$('#LinkRef').prop("readonly", true);
+        } else {
+            $('.statusLabel').text('Không hiển thị');
+            //if ($('#IsShow').val() == 'false' && $('#LinkRef').val().length == 0) {
+            //    swal({
+            //        title: "Ẩn bài viết",
+            //        text: "Xin nhập redirect khi ẩn bài viết (nếu có).",
+            //        confirmButtonColor: "#EF5350",
+            //        type: "warning"
+            //    });
+            //}
+            //$('#LinkRef').prop("readonly", false);
+        }
+
+        console.log(clickCheckbox.checked);  // 0 or 1 on change
+    });
+    $('.btnIsHot').on("change", function (e) {
+        var clickCheckbox = document.querySelector('.btnIsHot')
+        $('#IsHot').val(clickCheckbox.checked);
+        if (clickCheckbox.checked) {
+            $('.statushotLabel').text('Tin hot');
+        } else {
+            $('.statushotLabel').text('Không hot');
+        }
+        console.log(clickCheckbox.checked);  // 0 or 1 on change
+    });
+    $('.btnNoIndex').on("change", function (e) {
+        var clickCheckbox = document.querySelector('.btnNoIndex')
+        $('#NoIndex').val(clickCheckbox.checked);
+        if (clickCheckbox.checked) {
+            $('.statusNoIndex').text('No Index');
+        } else {
+            $('.statusNoIndex').text('Index');
+        }
+        console.log(clickCheckbox.checked);  // 0 or 1 on change
+    });
+
+
+    $(document).ready(function () {
+        // This WILL work because we are listening on the 'document',
+        // for a click on an element with an ID of #test-element
+        $(document).on("click", "#ProductRef>li", function () {
+            $('.lbProduct').append('<span class="label label-striped border-left-teal-300 label-icon"> ' + $(this).text() + ' <i class="icon-cancel-circle2 removeProduct" data-id="' + $(this).attr('data-id') + '"></i></span>');
+            $(this).remove();
+            var productId = $('#ProductReferent').val() + ',' + $(this).attr('data-id');
+            $('#ProductReferent').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+
+        $(document).on("click", "#NewsRef>li", function () {
+            if ($('.lbNewsRef i[data-id=' + $(this).attr('data-id') + ']').length == 0) {
+                $('.lbNewsRef').append('<span class="label label-striped border-left-teal-300 label-icon"> ' + $(this).text() + ' <i class="icon-cancel-circle2 removeNewsRef" data-id="' + $(this).attr('data-id') + '"></i></span>');
+                var productId = $('#NewsRefID').val() + ',' + $(this).attr('data-id');
+                $('#NewsRefID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+            }
+            $(this).remove();
+        });
+
+        $(document).on("click", ".removeNewsRef", function () {
+            $(this).parent().remove();
+            var productId = $('#NewsRefID').val().replace($(this).attr('data-id'), '').replace(',,', ',');
+            $('#NewsRefID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+
+        $(document).on("click", "#EventRef>li", function () {
+            if ($('.lbEventRef i[data-id=' + $(this).attr('data-id') + ']').length == 0) {
+                $('.lbEventRef').html('<span class="label label-striped border-left-teal-300 label-icon"> ' + $(this).text() + ' <i class="icon-cancel-circle2 removeEventRef" data-id="' + $(this).attr('data-id') + '"></i></span>');
+                $('#EventID').val($(this).attr('data-id'));
+                //var productId = $('#EventRefID').val() + ',' + $(this).attr('data-id');
+                //$('#EventRefID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+            }
+            //$(this).remove();
+        });
+
+        $(document).on("click", ".removeEventRef", function () {
+            $(this).parent().remove();
+            $('#EventID').val('0');
+            //var productId = $('#EventRefID').val().replace($(this).attr('data-id'), '').replace(',,', ',');
+            //$('#EventRefID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+
+        $(document).on("click", ".removeProduct", function () {
+            $(this).parent().remove();
+            var productId = $('#ProductReferent').val().replace($(this).attr('data-id'), '').replace(',,', ',');
+            $('#ProductReferent').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+
+        $(document).on("click", ".removeTag", function () {
+            $(this).parent().remove();
+            var productId = $('#TagsID').val().replace($(this).attr('data-id'), '').replace(',,', ',');
+            $('#TagsID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+    });
+</script>
+<script>
+    $('.ProductRef').keyup(function (e) {
+        e.preventDefault();
+        clearTimeout(typingTimer);
+        $keyword = $(this).val();
+        var searchResul = $('#ProductRef');
+        typingTimer = setTimeout(function () {
+            if ($.trim($keyword).length > 0) {
+                var result = "";
+                var term = $.trim(decodeURI($keyword.replace(/!|@@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g, " ").replace("-", " ")));
+                term = term.replace("điện thoại", "dien thoai");
+                term = term.replace("dt", "dien thoai");
+                term = term.replace("máy tính bảng", "may tinh bang");
+                term = term.replace("laptop", "may tinh xach tay");
+                term = term.replace("máy tính xách tay", "may tinh xach tay");
+                getDatafromElastic(term, result, searchResul, "* AND ");
+                //searchProductByName(term, result, searchResul);
+            }
+            else {
+                searchResul.html('');
+            }
+        }, 500);
+    });
+
+    var typingTimer;
+    $('.NewsRef').keyup(function (e) {
+        e.preventDefault();
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(searchNews, 1000);
+    });
+    function searchNews() {
+        //do something
+        $keyword = $('.NewsRef').val();
+        var searchResul = $('#NewsRef');
+        if ($.trim($keyword).length > 0) {
+            var result = "";
+            var term = $.trim(decodeURI($keyword.replace(/!|@@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g, " ").replace("-", " ")));
+            //var stringQuery = term.replace(/ /g, "* AND ");
+            var data = {
+                "text": term,
+                "num": 10
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SearchNews", "Article")',
+                dataType: "JSON",
+                data: data,
+                success: function (data) {
+                    if ((data.Data == '' || data.Data == null)) {
+                        //var href = "http://fptshop.com.vn/tim-kiem/" + term + "";
+                        //result = "<li><a href='" + href + "'>Hiển thị kết quả cho <b><i>" + term + "</i></b></a></li>";
+                        result = '<i class="error">> Không tìm thấy ' + term + '.</i>';
+                    } else {
+                        if (data.Data != '' && data.Data != null) {
+                            $.each(data.Data, function (i, v) {
+                                var urlpic = '<img src="' + 'http://cdn.fptshop.com.vn/Uploads/Thumbs/' + v.PictureUrl + '" alt = "' + v.Title + '" style=" width: 80px; " >';
+
+                                result += "<li data-id='" + v.ID + "'>" + urlpic + " " + v.ID + ' - ' + v.Title + "</li>";
+                            });
+                        } else {
+                            searchResul.html('');
+                        }
+                    }
+                    searchResul.html(result);
+                }
+            });
+        }
+        else {
+            searchResul.html('');
+        }
+    }
+
+    $('.EventRef').keyup(function (e) {
+        e.preventDefault();
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(searchEvent, 1000);
+    });
+    function searchEvent() {
+        //do something
+        $keyword = $('.EventRef').val();
+        var searchResul = $('#EventRef');
+        if ($.trim($keyword).length > 0) {
+            var result = "";
+            var term = $.trim(decodeURI($keyword.replace(/!|@@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g, " ").replace("-", " ")));
+            //var stringQuery = term.replace(/ /g, "* AND ");
+            var data = {
+                "text": term,
+                "num": 10
+            };
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SearchEvent", "Article")',
+                dataType: "JSON",
+                data: data,
+                success: function (data) {
+                    if ((data.Data == '' || data.Data == null)) {
+                        //var href = "http://fptshop.com.vn/tim-kiem/" + term + "";
+                        //result = "<li><a href='" + href + "'>Hiển thị kết quả cho <b><i>" + term + "</i></b></a></li>";
+                        result = '<i class="error">> Không tìm thấy ' + term + '.</i>';
+                    } else {
+                        if (data.Data != '' && data.Data != null) {
+                            $.each(data.Data, function (i, v) {
+                                var urlpic = '<img src="' + 'http://cdn.fptshop.com.vn/Uploads/Thumbs/' + v.PictureUrl + '" alt = "' + v.Name + '" style=" width: 80px; " >';
+
+                                result += "<li data-id='" + v.ID + "'>" + urlpic + " " + v.ID + ' - ' + v.Name + "</li>";
+                            });
+                        } else {
+                            searchResul.html('');
+                        }
+                    }
+                    searchResul.html(result);
+                }
+            });
+        }
+        else {
+            searchResul.html('');
+        }
+    }
+
+    //$('.NewsRef').keyup(function (e) {
+    //    e.preventDefault();
+    //    $keyword = $(this).val();
+    //    var searchResul = $('#NewsRef');
+    //    if ($.trim($keyword).length > 0) {
+    //        var result = "";
+    //        var term = $.trim(decodeURI($keyword.replace(/!|@@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g, " ").replace("-", " ")));
+    //        var stringQuery = term.replace(/ /g, "* AND ");
+    //        var data = {
+    //            "query": {
+    //                "query_string": {
+    //                    "query": stringQuery + "*",
+    //                    "fields": [
+    //                        "name",
+    //                        "nameascii"
+    //                    ]
+    //                }
+    //            },
+    //            "from": 0,
+    //            "size": 10,
+    //            "sort": [
+    //            { "datecreated.keyword": { "order": "desc" } }
+    //            ],
+    //            "aggs": {}
+    //        };
+    //        $.ajax({
+    //            type: "POST",
+    //            url: 'https://gateway.fptshop.com.vn/newss/_search',
+    //            dataType: "JSON",
+    //            data: JSON.stringify(data),
+    //            success: function (data) {
+    //                if ((data.hits.hits == '' || data.hits.hits == null)) {
+    //                    var href = "http://fptshop.com.vn/tim-kiem/" + term + "";
+    //                    result = "<li><a href='" + href + "'>Hiển thị kết quả cho <b><i>" + term + "</i></b></a></li>";
+    //                } else {
+    //                    if (data.hits.hits != '' && data.hits.hits != null) {
+    //                        $.each(data.hits.hits, function (i, v) {
+    //                            var urlpic = '<img src="' + 'http://cdn.fptshop.com.vn/Uploads/Thumbs/' + v._source.urlpicture + '" alt = "' + v._source.name + '" style=" width: 80px; " >';
+    //                            result += "<li data-id='" + v._source.id + "'>" + urlpic + " " + v._source.name + "</li>";
+    //                        });
+    //                    } else {
+    //                        searchResul.html('');
+    //                    }
+    //                }
+    //                searchResul.html(result);
+    //            }
+    //        });
+    //    }
+    //    else {
+    //        searchResul.html('');
+    //    }
+    //})
+
+    function getDatafromElastic(strInput, result, searchResul, Condition) {
+        var term = "*" + strInput + "*";
+        var stringQuery = "";
+        //stringQuery = stringQuery + " AND isnottrade:0"
+        if (strInput.indexOf("dien thoai") >= 0 || strInput.indexOf("may tinh bang") >= 0 || strInput.indexOf("may tinh xach tay") >= 0) {
+            if (strInput.indexOf("dien thoai") >= 0) {
+
+                term = term.replace("dien thoai", "").trim();
+                stringQuery = term.replace(/ /g, Condition) + " AND typenameascii.keyword:dien-thoai";
+            }
+            else if (term.indexOf("may tinh bang") >= 0) {
+                term = term.replace("may tinh bang", "").trim();
+                stringQuery = term.replace(/ /g, Condition) + " AND typenameascii.keyword:may-tinh-bang";
+            }
+            else {
+                term = term.replace("may tinh xach tay", "").trim();
+                stringQuery = term.replace(/ /g, Condition) + " AND typenameascii.keyword:may-tinh-xach-tay";
+            }
+        }
+        else
+            stringQuery = term.replace(/ /g, Condition);
+
+        var data = {
+            "query": {
+                "query_string": {
+                    "query": stringQuery,
+                    "fields": [
+                        "nameproduct",
+                        "nameascii"
+                    ]
+                }
+            },
+            "from": 0,
+            "size": 10,
+            "sort": [
+                  { "isnottrade.keyword": { "order": "asc" } },
+                        //{ "empty": { "order": "asc" } },
+                        { "typenameascii.keyword": { "order": "asc" } },
+                        { "ishot.keyword": { "order": "desc" } },
+                        { "empty": { "order": "asc" } }
+                        //{ "displayorder": { "order": "desc" } }
+            ],
+            "aggs": {}
+        };
+        $.ajax({
+            url: 'https://search.fptshop.com.vn/api/Search',
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                key: JSON.stringify(data),
+                type: "products"
+
+            },
+            success: function (data) {
+                if ((data.hits.hits == '' || data.hits.hits == null)) {
+                    result = "<li class='error'>Không tìm thấy kết quả cho <b><i>" + term + "</i></b></li>";
+                } else {
+                    if (data.hits.hits != '' && data.hits.hits != null) {
+
+                        $.each(data.hits.hits, function (i, v) {
+                            var t = v._source.nameproduct;
+                            result += "<li data-id='" + v._source.id + "'>" + t + "</li>";
+                        });
+                    } else {
+                        result = "";
+                    }
+                }
+                searchResul.html(result);
+
+                if (Condition == "* AND " && data.hits.hits.length == 0)
+                    getDatafromElastic(strInput, result, searchResul, "* OR ");
+            }
+        });
+
+    }
+
+    function searchProductByName(strInput, result, searchResul)
+    {
+        $.ajax({
+            url: "@Url.Action("SearchProductByName", "Article")",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                text: strInput,
+                num: 10
+            },
+            success: function (data) {
+                if (data == null || data == '' || data.length == 0) {
+                    result = "<li class='error'>Không tìm thấy kết quả cho <b><i>" + strInput + "</i></b></li>";
+                } else {
+                    $.each(data, function (i, v) {
+                        var t = v.NameProduct;
+                        result += "<li data-id='" + v.ID + "'>" + t + "</li>";
+                    });
+                }
+                searchResul.html(result);
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#FileUpload').on('change', function () {
+            var files = $("#FileUpload").get(0).files;
+            if (files.length > 0) {
+                for (var i = 0; i < files.length; i++) {
+                    var data = new FormData();
+                    var newFileName = renameFile(files[i]);
+                    data.append("Filedata", files[i], newFileName);
+                    $.ajax({
+                        type: "POST",
+                        url: '/Admin/Article/CheckImage',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            if (!result) {
+                                alert('File ảnh không hợp lệ');
+                                return;
+                            }
+                            var ajaxRequest = $.ajax({
+                                type: "POST",
+                                url: 'https://resource.fptshop.com.vn/Uploadify/uploadify.ashx',
+                                contentType: false,
+                                processData: false,
+                                data: data
+                            });
+                            ajaxRequest.done(function (reposnse) {
+                                var folder = formatDate();
+                                var urlUploaded = 'http://cdn.fptshop.com.vn/Uploads/Mediums/' + folder + '/' + reposnse;
+                                $('#preview-img').attr("src", urlUploaded);
+                                $('#Name').val(reposnse);
+                                $('#FileName').val(reposnse);
+
+                                $.post("/Admin/Article/InsertPicture", { Name: reposnse, Folder: folder }, function (data) {
+                                    if (data.Error == false)
+
+                                        $('#PictureID').val(data.PictureID)
+
+                                    else {
+                                        alert("False");
+                                    }
+                                });
+
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
+        function renameFile(file) {
+            var extensionLocal = file.name.lastIndexOf(".");
+            var filenames = file.name.slice(0, extensionLocal);
+            var extension = file.name.slice(extensionLocal);
+            return getSlug(filenames) + extension;
+        }
+
+        function validateImage(file) {
+            var data = new FormData();
+            data.append("file", file);
+            $.when($.ajax({
+                type: "POST",
+                url: '/Admin/Article/CheckImage',
+                contentType: false,
+                processData: false,
+                data: data
+            })).done(function (reposnse) {
+                return reposnse;
+            });
+        }
+
+        //$('.TagRef').keyup(function (e) {
+        //    e.preventDefault();
+        //    $keyword = $(this).val();
+        //    var TagValue = $('.TagRef').val();
+        //    var tagId = $('#TagsID').val();
+        //    if (e.keyCode == 13 && TagValue.length > 0) {
+        //        $.post("/Admin/Article/InsertTags", { Name: TagValue }, function (data) {
+        //            if (data.Error == false)
+        //                tagId = $('#TagsID').val() + ',' + data.TagID,
+        //                $('#TagsID').val(tagId.indexOf(',') == 0 ? tagId.substring(1) : tagId),
+        //                $('.lbTag').append('<span class="label label-striped border-left-teal-300 label-icon">' + TagValue + '<i class="icon-cancel-circle2 removeTag" data-id="' + data.TagID + '"></i></span>'),
+        //                $('.TagRef').val('')
+        //            else {
+        //                alert("OK");
+        //            }
+        //        });
+        //    }
+        //})
+
+        $('.TagRef').keyup(function (e) {
+            e.preventDefault();
+            $keyword = $(this).val();
+            var TagValue = $('.TagRef').val();
+            var tagId = $('#TagsID').val();
+            $.post("/Admin/Article/GetListTagsByName", { Name: TagValue }, function (data) {
+                $('#TagRef').html(data)
+            });
+
+        })
+
+        $(document).on("click", "#TagRef>li", function () {
+            var id = parseInt($(this).attr('data-id'));
+            $keyword = $(this).val();
+            var TagValue = $('.TagRef').val();
+            var tagId = $('#TagsID').val();
+            if (id == 0) {
+                //$.post("/Admin/Article/InsertTags", { Name: TagValue }, function (data) {
+                //    if (data.Error == false)
+                //        tagId = $('#TagsID').val() + ',' + data.TagID,
+                //        $('#TagsID').val(tagId.indexOf(',') == 0 ? tagId.substring(1) : tagId),
+                //        $('.lbTag').append('<span class="label label-striped border-left-teal-300 label-icon">' + TagValue + '<i class="icon-cancel-circle2 removeTag" data-id="' + data.TagID + '"></i></span>'),
+                //        $('.TagRef').val(''),
+                //            $(this).remove();
+
+
+                //    else {
+                //        alert("False");
+                //    }
+                //});
+            } else {
+                $('.lbTag').append('<span class="label label-striped border-left-teal-300 label-icon"> ' + $(this).text() + ' <i class="icon-cancel-circle2 removeTagRef" data-id="' + $(this).attr('data-id') + '"></i></span>');
+                $(this).remove();
+                var productId = $('#TagsID').val() + ',' + $(this).attr('data-id');
+                $('#TagsID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+            }
+        });
+
+        $(document).on("click", ".removeTagRef", function () {
+            $(this).parent().remove();
+            var productId = $('#TagsID').val().replace($(this).attr('data-id'), '').replace(',,', ',');
+            $('#TagsID').val(productId.indexOf(',') == 0 ? productId.substring(1) : productId);
+        });
+
+        $('[name=promotionDateRange]').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        }, function (start, end, label) {
+            $('[name=StartPromotionDate').val(start.format('YYYY-MM-DD HH:mm'));
+            $('[name=EndPromotionDate]').val(end.format('YYYY-MM-DD HH:mm'));
+        });
+
+        function formatDate() {
+            var d = new Date(),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = month;
+            if (day.length < 2) day = day;
+
+            return [year, month, day].join('/');
+        }
+
+        $('[name=StartDateDisplay]').daterangepicker({
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            timePicker: true,
+            applyClass: 'bg-slate-600',
+            cancelClass: 'btn-default',
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        });
+
+        $(".publicajax").click(function () {
+            var url = $(this).data("url");
+            $.get(url, function (data) {
+                if (data.Error) {
+                    swal({
+                        title: "Duyệt tin tức thất bại",
+                        text: 'Thất bại!',
+                        confirmButtonColor: "#EF5350",
+                        type: "error"
+                    });
+                }
+                else {
+                    swal({
+                        title: "Duyệt thành công ",
+                        text: "Thành công!",
+                        confirmButtonColor: "#66BB6A",
+                        type: "success"
+                    }, function (result) {
+                        window.location.href = '@Url.Action("Index")';
+                    });
+                }
+            });
+        });
+        $(".deleteajax").click(function () {
+            var url = $(this).data("url");
+            var mess = "Bạn chắc chắn xóa?";
+            if(confirm(mess))
+            {
+                $.get(url, function (data) {
+                    if (data.Error) {
+                        swal({
+                            title: "Xóa thất bại",
+                            text: 'Thất bại!',
+                            confirmButtonColor: "#EF5350",
+                            type: "error"
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Xóa thành công ",
+                            text: "Thành công!",
+                            confirmButtonColor: "#66BB6A",
+                            type: "success"
+                        }, function (result) {
+                            window.location.href = '@Url.Action("Index")';
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>

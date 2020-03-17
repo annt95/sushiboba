@@ -49,6 +49,19 @@ namespace bobaadmin
             var results = db.vw_menuadmin;
             return results;
         }
+        public AdminModel GetArticleById(int Id)
+        {
+            var result = new AdminModel();
+
+            var query = FPTShop_NewsV4_DB.Database.SqlQuery<NewsItemMaping>("exec [dbo].[FRT_News_GetArticleById] @Id", new SqlParameter("Id", Id));
+
+            result.NewsItem = query.Select(p => new NewsItems()
+            {
+                ID = p.ID,
+
+            }).FirstOrDefault();
+            return result;
+        }
         public ActionResult EditForm(int id = 0, string renew = null)
         {
             //var NumberRecord = WebConfig.NumberRecord;
@@ -57,8 +70,8 @@ namespace bobaadmin
             var obj = new AdminModel();
             if (id > 0)
             {
-                obj = articleRepository.GetArticleById(id);
-                ViewBag.AllowEdit = CheckEditCTV(obj);
+                obj = GetArticleById(id);
+                //ViewBag.AllowEdit = CheckEditCTV(obj);
                 if (obj.NewsItem != null && obj.NewsItem.EventID != null)
                 {
                     var eventRef = eventRepository.GetEventsById(obj.NewsItem.EventID.Value);
@@ -91,5 +104,6 @@ namespace bobaadmin
             obj.listNewsRef = GetListNewsReferent(id.ToString());
             return View(obj);
         }
+        
     }
 }
