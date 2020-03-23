@@ -5,7 +5,9 @@ namespace bobaadmin.Models
 {
     public  class AdminModel
     {
-        public Admins AdminsItem { get; set; }
+        public AdminsItem AdminsItem { get; set; }
+        public Menu Menu { get; set; }
+
         public int totalRecord { get; set; }
     }
 }

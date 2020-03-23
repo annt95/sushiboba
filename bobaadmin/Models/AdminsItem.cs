@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace bobaadmin.Models
 {
-    public partial class Admins
+    public partial class AdminsItem
     {
         public int Id { get; set; }
         public string Name { get; set; }

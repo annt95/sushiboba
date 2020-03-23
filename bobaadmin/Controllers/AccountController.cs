@@ -56,7 +56,7 @@ namespace bobaadmin
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Validate(Admins admin)
+        public async Task<IActionResult> Validate(AdminsItem admin)
         {
 
             //if (ModelState.IsValid)
@@ -128,7 +128,7 @@ namespace bobaadmin
             //    return Json(new { status = false, message = "Invalid login attempt." });
             //}
         }
-        public ActionResult checkLogin(Admins admin)
+        public ActionResult checkLogin(AdminsItem admin)
         {
             var _admin = db.Admins.Where(s => s.Email == admin.Email);
 

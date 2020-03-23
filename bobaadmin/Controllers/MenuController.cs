@@ -53,11 +53,13 @@ namespace bobaadmin
         {
             var result = new AdminModel();
 
-            var query = FPTShop_NewsV4_DB.Database.SqlQuery<NewsItemMaping>("exec [dbo].[FRT_News_GetArticleById] @Id", new SqlParameter("Id", Id));
-
-            result.NewsItem = query.Select(p => new NewsItems()
+           // var query = db.Database.SqlQuery<Menu>("exec [dbo].[db] @Id", new SqlParameter("Id", Id));
+            var query = db.LoadStoredProc("[GetMenuId]")                    
+                       .WithSqlParam("@Id", Id)
+                       .ExecuteStoredProc<Menu>();
+            result.Menu = query.Select(p => new Menu()
             {
-                ID = p.ID,
+                id = p.id,
 
             }).FirstOrDefault();
             return result;
@@ -72,9 +74,9 @@ namespace bobaadmin
             {
                 obj = GetArticleById(id);
                 //ViewBag.AllowEdit = CheckEditCTV(obj);
-                if (obj.NewsItem != null && obj.NewsItem.EventID != null)
+                if (obj.Menu != null && obj.Menu.EventID != null)
                 {
-                    var eventRef = eventRepository.GetEventsById(obj.NewsItem.EventID.Value);
+                    var eventRef = eventRepository.GetEventsById(obj.Menu.EventID.Value);
                     obj.listEvents = new List<EventItems>();//eventRepository.GetList(out total, 0, NumberRecord, "ID", true, false);
                     if (eventRef != null)
                         obj.listEvents.Add(eventRef);
