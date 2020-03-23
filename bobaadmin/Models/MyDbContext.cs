@@ -17,6 +17,7 @@ namespace bobaadmin.Models
 
         public virtual DbSet<AdminsItem> Admins { get; set; }
         public virtual DbQuery<Menu> vw_menuadmin { get; set; }
+        public virtual DbQuery<MenuItems> MenuItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -29,6 +30,52 @@ namespace bobaadmin.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
             modelBuilder.Query<Menu>().ToView("vw_menuadmin");
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.ToTable("menu");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Created)
+                    .HasColumnName("created")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Gender)
+                    .HasColumnName("gender")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .HasColumnName("phone")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Specialist)
+                    .IsRequired()
+                    .HasColumnName("specialist")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
             modelBuilder.Entity<AdminsItem>(entity =>
             {
                 entity.ToTable("admins");

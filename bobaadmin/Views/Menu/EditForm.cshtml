@@ -1,12 +1,17 @@
 ﻿
 @model bobaadmin.Models.AdminModel
-
+@{
+    ViewBag.Title = "EditForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
 <style>
     .error {
         color: red;
     }
 </style>
 <!-- Theme JS files -->
+
 <script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>
 <script type="text/javascript" src="~/js/plugins/forms/selects/select2.min.js"></script>
 <script type="text/javascript" src="~/js/plugins/forms/styling/switchery.min.js"></script>
@@ -46,11 +51,12 @@
             toolbar: 'Full',
             height: 250,
             extraPlugins: 'youtube,fptshop,fptShopCompare',
-            filebrowserBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?newsid=@Model.AdminsItem.Id',
-            filebrowserImageBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?Type=Images&newsid=@Model.AdminsItem.Id',
+
+            filebrowserBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?newsid=2',
+            filebrowserImageBrowseUrl: '/js/plugins/fpt/ckfinder/ckfinder.html?Type=Images&newsid=2'
         });
 
-    //createCKFider('ImagesUrl', 162);
+        //createCKFider('ImagesUrl', 162);
     });
 </script>
 <!-- Page header -->
