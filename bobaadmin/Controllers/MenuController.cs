@@ -25,18 +25,18 @@ namespace bobaadmin
         [HttpPost]
         public JsonResult GetListKendoUI(int take = 20, int skip = 0, IEnumerable<Kendo.DynamicLinq.Sort> sort = null, Kendo.DynamicLinq.Filter filter = null)
         {
-            var posts = GetListKendoUI().Where(s => s.issushi == true);
+            var posts = GetListKendoUI().Where(s => s.Issushi == true);
             var data = posts.Select(t => new
             {
-                t.id,
-                t.name,
-                t.description,
-                t.images,
-                t.price,
-                t.active,
-                t.ishot,
-                t.issushi,
-                t.ismilktea
+                t.Id,
+                t.Name,
+                t.Description,
+                t.Images,
+                t.Price,
+                t.Active,
+                t.Ishot,
+                t.Issushi,
+                t.Ismilktea
             });
             return Json(data.ToDataSourceResult(take, skip, sort, filter), new Newtonsoft.Json.JsonSerializerSettings());
         }
@@ -59,7 +59,7 @@ namespace bobaadmin
                        .ExecuteStoredProc<Menu>();
             result.Menu = query.Select(p => new Menu()
             {
-                id = p.id,
+                Id = p.Id,
 
             }).FirstOrDefault();
             return result;
@@ -116,48 +116,47 @@ namespace bobaadmin
 
         public ActionResult Index()
         {
-            return View(db.MenuItems.ToList());
+            return View(db.Menu.ToList());
         }
         public ActionResult Create()
         {
             return View();
         }
-        //[HttpPost]
-        //public ActionResult CreateDoctor(MenuItems menu)
-        //{
-        //    db.MenuItems.Add(menu);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index", "Doctors");
-        //}
-        //[HttpPost]
-        //public bool Delete(int id)
-        //{
-        //    try
-        //    {
-        //        Doctors doctor = db.Doctors.Where(s => s.Id == id).First();
-        //        db.Doctors.Remove(doctor);
-        //        db.SaveChanges();
-        //        return true;
-        //    }
-        //    catch (System.Exception)
-        //    {
-        //        return false;
-        //    }
+        [HttpPost]
+        public ActionResult CreateDoctor(Menu menu)
+        {
+            db.Menu.Add(menu);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Menu");
+        }
+        [HttpPost]
+        public bool Delete(int id)
+        {
+            try
+            {
+                Menu doctor = db.Menu.Where(s => s.Id == id).First();
+                db.Menu.Remove(doctor);
+                db.SaveChanges();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
 
-        //}
-        //public ActionResult Update(int id)
-        //{
-        //    return View(db.Doctors.Where(s => s.Id == id).First());
-        //}
-        //[HttpPost]
-        //public ActionResult UpdateDoctor(Doctors doctor)
-        //{
-        //    Doctors d = db.Doctors.Where(s => s.Id == doctor.Id).First();
-        //    d.Name = doctor.Name;
-        //    d.Phone = doctor.Phone;
-        //    d.Specialist = doctor.Specialist;
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index", "Doctors");
-        //}
+        }
+        public ActionResult Update(int id)
+        {
+            return View(db.Menu.Where(s => s.Id == id).First());
+        }
+        [HttpPost]
+        public ActionResult UpdateDoctor(Menu doctor)
+        {
+            Menu d = db.Menu.Where(s => s.Id == doctor.Id).First();
+            d.Price = doctor.Price;
+            d.Description = doctor.Description;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Menu");
+        }
     }
 }

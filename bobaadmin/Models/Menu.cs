@@ -5,14 +5,15 @@ namespace bobaadmin.Models
 {
     public partial class Menu
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string images { get; set; }
-        public string price { get; set; }
-        public bool active { get; set; }
-        public bool ishot { get; set; }
-        public bool issushi { get; set; }
-        public bool ismilktea { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Images { get; set; }
+        public string Price { get; set; }
+        public bool Active { get; set; }
+        public bool? Ishot { get; set; }
+        public bool? Issushi { get; set; }
+        public bool? Ismilktea { get; set; }
+        public bool? Isdelete { get; set; }
     }
 }
