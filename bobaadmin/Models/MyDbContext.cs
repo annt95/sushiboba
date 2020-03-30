@@ -20,7 +20,7 @@ namespace bobaadmin.Models
         public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<Mapmenu> Mapmenu { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbQuery<Menu> vw_menuadmin { get; set; }
+        public virtual DbQuery<MenuItems> vw_menuadmin { get; set; }
         public virtual DbQuery<MenuItems> MenuItems { get; set; }
         // Unable to generate entity type for table 'dbo.VersionInfo'. Please see the warning messages.
 
@@ -35,7 +35,7 @@ namespace bobaadmin.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
-            modelBuilder.Query<Menu>().ToView("vw_menuadmin");
+            modelBuilder.Query<MenuItems>().ToView("vw_menuadmin");
             modelBuilder.Entity<Admins>(entity =>
             {
                 entity.ToTable("admins");

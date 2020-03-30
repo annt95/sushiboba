@@ -25,18 +25,18 @@ namespace bobaadmin
         [HttpPost]
         public JsonResult GetListKendoUI(int take = 20, int skip = 0, IEnumerable<Kendo.DynamicLinq.Sort> sort = null, Kendo.DynamicLinq.Filter filter = null)
         {
-            var posts = GetListKendoUI().Where(s => s.Issushi == true);
+            var posts = GetListKendoUI().Where(s => s.issushi == true);
             var data = posts.Select(t => new
             {
-                t.Id,
-                t.Name,
-                t.Description,
-                t.Images,
-                t.Price,
-                t.Active,
-                t.Ishot,
-                t.Issushi,
-                t.Ismilktea
+                t.id,
+                t.name,
+                t.description,
+                t.images,
+                t.price,
+                t.active,
+                t.ishot,
+                t.issushi,
+                t.ismilktea
             });
             return Json(data.ToDataSourceResult(take, skip, sort, filter), new Newtonsoft.Json.JsonSerializerSettings());
         }
@@ -44,7 +44,7 @@ namespace bobaadmin
         //{
         //    var data = 
         //}
-        private IQueryable<Menu> GetListKendoUI()
+        private IQueryable<MenuItems> GetListKendoUI()
         {
             var results = db.vw_menuadmin;
             return results;
@@ -116,7 +116,8 @@ namespace bobaadmin
 
         public ActionResult Index()
         {
-            return View(db.Menu.ToList());
+            var a = db.Menu.ToList();
+            return View(a);
         }
         public ActionResult Create()
         {
