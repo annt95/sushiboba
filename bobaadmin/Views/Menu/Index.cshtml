@@ -15,7 +15,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Doctors</li>
+        <li class="active">Menu</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -24,19 +24,19 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Manage Doctors</h3>
+                    <h3 class="box-title">Manage menu</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="menus" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Created</th>
-                                <th>Specialist</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                @*<th>Created</th>
+                                <th>Specialist</th>*@
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -46,11 +46,11 @@
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                @*<td>@Html.DisplayFor(modelItem => item.Email)</td>
-        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-        <td>@Html.DisplayFor(modelItem => item.Created)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                @*<td>@Html.DisplayFor(modelItem => item.Created)</td>
         <td>@Html.DisplayFor(modelItem => item.Specialist)</td>*@
-                                <td><a href="Doctors/Update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
+                                <td><a href="Menu/Update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                             </tr>
                             }
                     </table>
@@ -66,12 +66,12 @@
 
 <!-- DataTables -->
 <script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>
-<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+@*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>*@
 <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- page script -->
 <script>
     $(function () {
-        $('#example1').DataTable();
+        $('#menus').DataTable();
     });
     function Delete(id){
         var txt;
@@ -81,7 +81,7 @@
             $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("Delete", "Doctors")',
+                url: '@Url.Action("Delete", "Menu")',
                 data: {
                     id: id
                 },
@@ -90,7 +90,7 @@
                 },
                 success: function (result) {
                     if (result == true) {
-                        var baseUrl="/Doctors";
+                        var baseUrl="/Menu";
                         window.location.reload();
                     }
                     else {
