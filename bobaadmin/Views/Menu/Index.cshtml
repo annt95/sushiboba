@@ -1,20 +1,22 @@
 @model IEnumerable<bobaadmin.Models.Menu>
 
+<!-- page script -->
+@*<script src="~/js/jquery-3.4.1.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>*@
+<!-- DataTables -->
+@*<script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>*@
+@*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>*@
+@*<script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap.min.js"></script>*@
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/dataTables.bootstrap.min.js"></script>
 <section class="content-header">
     <h1>
-        Admin Menu Page
-        @*<small>Optional description</small>*@
-    </h1>
-</section>
-<script src="~/js/jquery-3.4.1.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-
-<section class="content-header">
-    <h1>
-        Doctors
+        Menu
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Menu</li>
     </ol>
 </section>
@@ -36,22 +38,22 @@
                                 <th>Description</th>
                                 <th>Price</th>
                                 @*<th>Created</th>
-                                <th>Specialist</th>*@
+                                    <th>Specialist</th>*@
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                @*<td>@Html.DisplayFor(modelItem => item.Created)</td>
-        <td>@Html.DisplayFor(modelItem => item.Specialist)</td>*@
-                                <td><a href="Menu/Update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
-                            </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Created)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Specialist)</td>*@
+                                    <td><a href="Menu/Update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
+                                </tr>
                             }
                     </table>
                 </div>
@@ -64,11 +66,7 @@
     <!-- /.row -->
 </section>
 
-<!-- DataTables -->
-<script type="text/javascript" src="~/js/plugins/tables/datatables/datatables.min.js"></script>
-@*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>*@
-<script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- page script -->
+
 <script>
     $(function () {
         $('#menus').DataTable();
