@@ -116,7 +116,7 @@ namespace bobaadmin
 
         public ActionResult Index()
         {
-            var a = db.Menu.ToList();
+            var a = db.Menu.Where(s => s.Isdelete != true).ToList();
             return View(a);
         }
         public ActionResult Create()
@@ -137,6 +137,10 @@ namespace bobaadmin
             {
                 Menu doctor = db.Menu.Where(s => s.Id == id).First();
                 db.Menu.Remove(doctor);
+                //var query = db.LoadStoredProc("[GetMenuId]")
+                //      .WithSqlParam("@Id", Id)
+                //      .ExecuteStoredProc<Menu>();
+
                 db.SaveChanges();
                 return true;
             }
