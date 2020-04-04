@@ -1,5 +1,9 @@
-@model IEnumerable<bobaadmin.Models.Menu>
+﻿@model IEnumerable<bobaadmin.Models.Menu>
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
 
 
 <script src="~/js/jquery-3.4.1.js"></script>
@@ -23,6 +27,9 @@
                 <div class="box-header">
                     <h3 class="box-title">Manage menu</h3>
                 </div>
+                <div class="panel-body">
+                    <a href="/menu/create" class="btn btn-primary">Thêm mới</a>
+                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="menus" class="table table-bordered table-striped">
@@ -31,9 +38,11 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Price</th>
-                                
-                                <th>Action</th>
+                                <th width="100px">Price</th>
+                                <th width="50px">IsSushi</th>
+                                <th width="50px">IsMilktea</th>
+
+                                <th width="100px">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,9 +52,46 @@
                                     <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)$</td>
+                                    <td><center>@Html.DisplayFor(modelItem => item.Price)$</center></td>
+                                    <td>
+                                        @if (item.Issushi == true)
+                                        {
+                                            <center>
+                                                <label class="btn btn-success active">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            </center>
+
+                                        }
+                                        else
+                                        {<center>
+                                                <label class="btn btn-danger">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            </center>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (item.Ismilktea == true)
+                                        {
+                                            <center>
+                                                <label class="btn btn-success active">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            </center>
+                                        }
+                                        else
+                                        {<center>
+                                                <label class="btn btn-danger">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            </center>
+                                        }
+                                    </td>
+
                                     @*<td><img src="@item.Images" /></td>*@
-                                    
+
                                     <td><a href="Menu/Update/@item.Id">Update</a> | <a href="" onclick="Delete('@item.Id')">Delete</a></td>
                                 </tr>
                             }
