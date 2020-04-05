@@ -28,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Menu\EditForm.Add.cshtml" />
+    <Content Remove="Views\Menu\EditForm.cshtml" />
+    <Content Remove="Views\Menu\EditForm.Edit.cshtml" />
     <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
