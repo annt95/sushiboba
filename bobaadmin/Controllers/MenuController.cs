@@ -124,8 +124,10 @@ namespace bobaadmin
             return View();
         }
         [HttpPost]
-        public ActionResult CreateDoctor(Menu menu)
+        //public ActionResult CreateMenu(Menu menu)
+        public ActionResult CreateMenu(string Name, string Description, string Images, string Price, bool Issushi = false, bool Ismilktea = false)
         {
+            Menu menu = new Menu();
             db.Menu.Add(menu);
             db.SaveChanges();
             return RedirectToAction("Index", "Menu");
