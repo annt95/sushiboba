@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using bobaadmin.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -16,13 +19,17 @@ namespace bobaadmin
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services )
         {
+            
+            //            services.AddDbContext<MyDbContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("BobaConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+            options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
@@ -63,7 +70,7 @@ namespace bobaadmin
             app.UseMvc(routes =>
             {
                 routes
-                .MapRoute(name: "Ajax", template: "Ajax/{Controller}/{action}")
+                //.MapRoute(name: "Ajax", template: "Ajax/{Controller}/{action}")
                 
                 .MapRoute(name: "Sushi", template: "/menu/sushi", defaults: new { controller = "Menu", action = "Sushi" })
                 .MapRoute(name: "Milktea", template: "/menu/milktea", defaults: new { controller = "Menu", action = "Milktea" })

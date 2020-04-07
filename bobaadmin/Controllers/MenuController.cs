@@ -64,55 +64,7 @@ namespace bobaadmin
             }).FirstOrDefault();
             return result;
         }
-        public ActionResult EditForm(int id = 0, string renew = null)
-        {
-            //var NumberRecord = WebConfig.NumberRecord;
-            //var NumberRecordCategory = WebConfig.NumberRecordCategory;
-            int total = 0;
-            var obj = new AdminModel();
-            //if (id > 0)
-            //{
-            //    obj = GetArticleById(id);
-            //    //ViewBag.AllowEdit = CheckEditCTV(obj);
-            //    if (obj.Menu != null && obj.Menu.EventID != null)
-            //    {
-            //        var eventRef = eventRepository.GetEventsById(obj.Menu.EventID.Value);
-            //        obj.listEvents = new List<EventItems>();//eventRepository.GetList(out total, 0, NumberRecord, "ID", true, false);
-            //        if (eventRef != null)
-            //            obj.listEvents.Add(eventRef);
-            //    }
-            //    if (obj.NewsItem != null && renew != null)
-            //    {
-            //        var authorID = (Guid)Membership.GetUser(User.Identity.Name).ProviderUserKey;
-            //        var newid = articleRepository.GetDraft(authorID);
-            //        obj.NewsItem.OldID = obj.NewsItem.ID;
-            //        obj.NewsItem.ID = newid.NewsItem.ID;
-            //        obj.NewsItem.TitleAscii = obj.NewsItem.Title.Trim().GetSeName();
-            //        obj.NewsItem.IsRenew = true;
-            //    }
-            //}
-            //else
-            //{
-            //    var authorID = (Guid)Membership.GetUser(User.Identity.Name).ProviderUserKey;
-            //    obj = articleRepository.GetDraft(authorID);
-            //    obj.listEvents = new List<EventItems>();//eventRepository.GetList(out total, 0, NumberRecord, "ID", true, false);
-            //}
-            //if (obj.NewsItem == null)
-            //    return HttpNotFound();
-            //obj.listCategory = articleTypeRepository.GetList(out total, 0, NumberRecordCategory, "ID", false, false);
-            //obj.listCampaign = articleRepository.GetListCampaign();
-            //obj.listProductRef = GetListProductReferent(id.ToString());
-            //obj.listTagsRef = GetListTagsReferent(id.ToString());
-            //obj.listNewsRef = GetListNewsReferent(id.ToString());
-            return View(obj);
-        }
-
-
-
-        /// <summary>
-        ///   
-        /// </summary>
-        /// <returns></returns>
+        
 
         public ActionResult Index()
         {
@@ -124,10 +76,12 @@ namespace bobaadmin
             return View();
         }
         [HttpPost]
-        //public ActionResult CreateMenu(Menu menu)
-        public ActionResult CreateMenu(string Name, string Description, string Images, string Price, bool Issushi = false, bool Ismilktea = false)
+        public ActionResult CreateMenu(Menu menu)
+        //public ActionResult CreateMenu(string Name, string Description, string Images, string Price, bool Issushi = false, bool Ismilktea = false)
         {
-            Menu menu = new Menu();
+            //Menu menu = new Menu();
+            menu.Active = true;
+            menu.Isdelete = false;
             db.Menu.Add(menu);
             db.SaveChanges();
             return RedirectToAction("Index", "Menu");
@@ -138,7 +92,8 @@ namespace bobaadmin
             try
             {
                 Menu doctor = db.Menu.Where(s => s.Id == id).First();
-                db.Menu.Remove(doctor);
+                doctor.Isdelete = true;
+                //db.Menu.Remove(doctor);
                 //var query = db.LoadStoredProc("[GetMenuId]")
                 //      .WithSqlParam("@Id", Id)
                 //      .ExecuteStoredProc<Menu>();
@@ -157,11 +112,15 @@ namespace bobaadmin
             return View(db.Menu.Where(s => s.Id == id).First());
         }
         [HttpPost]
-        public ActionResult UpdateDoctor(Menu doctor)
+        public ActionResult UpdateMenu(Menu menu)
         {
-            Menu d = db.Menu.Where(s => s.Id == doctor.Id).First();
-            d.Price = doctor.Price;
-            d.Description = doctor.Description;
+            Menu d = db.Menu.Where(s => s.Id == menu.Id).First();
+            d.Price = menu.Price;
+            d.Description = menu.Description;
+            d.Images = menu.Images;
+            d.Name = menu.Name;
+            d.Issushi = menu.Issushi;
+            d.Ismilktea = menu.Ismilktea;
             db.SaveChanges();
             return RedirectToAction("Index", "Menu");
         }

@@ -126,7 +126,11 @@
 
 <script>
     $(function () {
-        $('#menus').DataTable();
+        $('#menus').DataTable(
+            {
+        "order": [[ 0, "desc" ]]
+        }
+        );
     });
     function Delete(id){
         var txt;
