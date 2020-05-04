@@ -57,7 +57,11 @@ namespace FrontEnd
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
+                routes
+                .MapRoute(name: "Ajax", template: "Ajax/{Controller}/{action}")
+                .MapRoute(name: "Menu", template: "/menu", defaults: new { controller = "Menu", action = "Home" })
+                .MapRoute(
+
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

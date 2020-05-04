@@ -3,41 +3,134 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FrontEnd</title>
-
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
-    </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] - Bobacha</title>
+    @RenderSection("header", required: false)
+    <!-- Css -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    @RenderSection("css", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FrontEnd</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div class="container">
+            <div class="mp-header_wrapper">
+                <a href="#" class="mp-header_logo">
+                    <img src="img/deli/logo.png" alt="" />
+                </a>
+                <div class="mp-header_menu">
+                    <div class="mp-header_menu_list">
+                        <div class="mp-header_item">
+                            <a href="tel:02838265888">
+                                <img src="img/deli/call.png" alt="" />
+                                Hotline: (028) 3826.5888
+                            </a>
+                        </div>
+                        <div class="mp-header_item">
+                            <a href="tel:02838265888">
+                                <img src="img/deli/call.png" alt="" />
+                                Delivery (TP.HCM): (028) 3826.5777
+                            </a>
+                        </div>
+                        @*<div class="mp-header_last">
+                        <a href="#">
+                            <img src="img/deli/vietnam.png" alt="" />
+                        </a>
+                        <a href="#">
+                            <img src="img/deli/uk.png" alt="" />
+                        </a>
+                    </div>*@
+                    </div>
+                    <nav class="mp-header_nav">
+                        <ul>
+                            <li>
+                                <a href="/" class="hvr-underline-from-center">Trang chủ</a>
+                            </li>
+                            @*<li>
+                                <a href="#" class="hvr-underline-from-center">GIỚI THIỆU</a>
+                            </li>*@
+                            <li class="active">
+                                <a href="#" class="hvr-underline-from-center">THỰC ĐƠN</a>
+                            </li>
+                            @*<li>
+                                <a href="#" class="hvr-underline-from-center">KHUYẾN MÃI</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hvr-underline-from-center">HỆ THỐNG NHÀ HÀNG</a>
+                            </li>*@
+                            @*<li>
+                                <a href="#" class="hvr-underline-from-center">THẺ THÀNH VIÊN</a>
+                            </li>*@
+                            @*<li>
+                                <a href="#" class="hvr-underline-from-center">LIÊN HỆ</a>
+                            </li>*@
+                        </ul>
+                    </nav>
                 </div>
+                <button class="mp-toggle-menu"><img src="img/deli/list.png" alt="" /></button>
             </div>
-        </nav>
+            <div class="mp-menu-mb">
+                <div class="mp-header_menu_list">
+                    <div class="mp-header_item">
+                        <a href="tel:02838265888">
+                            <img src="img/deli/call.png" alt="" />
+                            Hotline: (028) 3826.5888
+                        </a>
+                    </div>
+                    <div class="mp-header_item">
+                        <a href="tel:02838265888">
+                            <img src="img/deli/call.png" alt="" />
+                            Delivery (TP.HCM): (028) 3826.5777
+                        </a>
+                    </div>
+                    @*<div class="mp-header_last">
+                    <a href="#">
+                        <img src="img/deli/vietnam.png" alt="" />
+                    </a>
+                    <a href="#">
+                        <img src="img/deli/uk.png" alt="" />
+                    </a>
+                </div>*@
+                </div>
+                <ul class="mp-menu-mb_list">
+                    <li>
+                        <a href="#">
+                            Trang Chủ
+                        </a>
+                    </li>
+                    @*<li>
+                        <a href="#">
+                            Giới thiệu
+                        </a>
+                    </li>*@
+                    <li class="active">
+                        <a href="#">
+                            Thực đơn
+                        </a>
+                    </li>
+                    @*<li>
+                        <a href="#">
+                            Khuyến mãi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Hệ thống nhà hàng
+                        </a>
+                    </li>*@
+                    @*<li>
+                        <a href="#">
+                            Thẻ thành viên
+                        </a>
+                    </li>*@
+                    @*<li>
+                        <a href="#">
+                            Liên hệ
+                        </a>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
@@ -48,29 +141,58 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - FrontEnd - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="container">
+                <div class="mp-footer_social">
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-pinterest"></i>
+                    </a>
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#" class="mp-footer_social_item">
+                        <i class="fa fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mp-footer_bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5 col-xs-12">
+                            @*<ul>
+                            <li>
+                                <a href="#">Tuyển dụng</a>
+                            </li>
+                            <li>
+                                <a href="#">Tin tức</a>
+                            </li>
+                            <li>
+                                <a href="#">Đối tác</a>
+                            </li>
+                        </ul>*@
+                        </div>
+                        <div class="col-sm-7 col-xs-12">
+                            <p>
+                                Copyright © 2020
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+   
+   
 
     @RenderSection("Scripts", required: false)
 </body>

@@ -283,7 +283,7 @@ a:focus {
   outline: none; }
 
 body {
-  font-family: "Manus Smooth_TRIAL";
+  /*/font-family: "Manus Smooth_TRIAL";*/
   display: block;
   color: #0d0d0d; }
 
