@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Menu";
 }
-
+@model List<FrontEnd.Models.Menu>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,14 +13,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Css -->
     @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/style.css" />*@
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/style.css" />*@
 
 </head>
 <body>
     <main id="menu-page">
         <header class="mp-header">
-            
         </header>
         <div class="mp-banner">
             <img src="img/deli/banner-duoi.png" alt="" />
@@ -83,222 +82,209 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                    @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model)
+                    @* @Html.Action("GetMenu", "Menu", null)*@
+
+
+                    @*<div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
+                        <div class="col-sm-6">
+                            <div class="mp-product">
+                                <a href="#" class="mp-product_img">
+                                    <img src="img/deli/product.jpg" alt="" />
+                                </a>
+                                <div class="mp-product_info">
+                                    <div class="mp-product_code">Y4</div>
+                                    <h3 class="mp-product_name">
+                                        <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
+                                    </h3>
+                                    <div class="mp-product_text">
+                                        <p>GRILLED HOKKE FISH</p>
+                                        <p>ホッケ焼き</p>
+                                    </div>
+                                    <div class="mp-product_price">165.000 VNĐ</div>
                                 </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="mp-product">
-                            <a href="#" class="mp-product_img">
-                                <img src="img/deli/product.jpg" alt="" />
-                            </a>
-                            <div class="mp-product_info">
-                                <div class="mp-product_code">Y4</div>
-                                <h3 class="mp-product_name">
-                                    <a href="#" class="hvr-icon-wobble-horizontal">CÁ HOKKE NƯỚNG</a>
-                                </h3>
-                                <div class="mp-product_text">
-                                    <p>GRILLED HOKKE FISH</p>
-                                    <p>ホッケ焼き</p>
-                                </div>
-                                <div class="mp-product_price">165.000 VNĐ</div>
-                            </div>
-                        </div>
-                    </div>
+                        </div>*@
+
                 </div>
                 <!-- <div class="row"> -->
                 <!-- <nav class="mp-pagi"> -->
@@ -318,8 +304,8 @@
         </div>
     </main>
     @*<footer class="mp-footer">
-        
-    </footer>*@
+
+        </footer>*@
     <script src="js/libs/jquery-1.11.2.min.js"></script>
     <script src="js/libs/bootstrap.min.js"></script>
     <script src="js/functions.js"></script>

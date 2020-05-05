@@ -19,7 +19,13 @@ namespace FrontEnd.Controllers
         public IActionResult Index()
         {
             var data = bobaDA.GetListShopeeItem();
-            return View();
+            return View(data);
+        }
+        public ActionResult GetMenu()
+        {
+            var vỉew = "GetMenu";
+            var data = bobaDA.GetListShopeeItem();
+            return View(vỉew, data);
         }
 
         public IActionResult Privacy()
