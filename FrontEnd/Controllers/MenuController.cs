@@ -10,8 +10,15 @@ namespace FrontEnd.Controllers
 {
     public class MenuController : Controller
     {
+        public MenuController(BobaDA bobaDA)
+        {
+            this.bobaDA = bobaDA; ;
+        }
+
+        private BobaDA bobaDA;
         public IActionResult Index()
         {
+            var data = bobaDA.GetListShopeeItem();
             return View();
         }
 
