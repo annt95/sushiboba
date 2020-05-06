@@ -54,7 +54,7 @@ namespace bobaadmin
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
-        [AllowAnonymous]
+        
         [HttpPost]
         public async Task<IActionResult> Validate(AdminsItem admin)
         {

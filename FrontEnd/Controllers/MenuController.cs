@@ -23,9 +23,9 @@ namespace FrontEnd.Controllers
         }
         public ActionResult GetMenu()
         {
-            var vỉew = "GetMenu";
+            var view = "GetMenu";
             var data = bobaDA.GetListShopeeItem();
-            return View(vỉew, data);
+            return View(view, data);
         }
 
         public IActionResult Privacy()

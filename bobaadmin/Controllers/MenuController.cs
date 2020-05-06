@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using Kendo.DynamicLinq;
 using bobaadmin.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bobaadmin
 {
+    [Authorize]
     public class MenuController : Controller
     {
         MyDbContext db = new MyDbContext();
