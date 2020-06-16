@@ -24,31 +24,46 @@
         <div class="mp-banner">
             <img src="~/img/BannerMenu.png" alt="" />
         </div>
+        <nav aria-label="breadcrumb" class="mp-breadcrumb clearfix">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Menu</li>
+            </ol>
+        </nav>
         <div class="mp-body">
             <div class="container">
-                <nav aria-label="breadcrumb" class="mp-breadcrumb clearfix">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Menu</li>
-                    </ol>
-                </nav>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h1 class="mp-heading">Menu</h1>
-                        <div class="mp-direction">
-                             <div class="mp-direction_content"> 
-                             <button type="button" class="btn">Sushi</button> 
-                             <button type="button" class="btn">Bobble Tea</button> 
-                             </div> 
-                        </div>
-                        </div>
+                        <h1 class="mp-heading">Sushi</h1>
+                        @*<div class="mp-direction">
+                             <div class="mp-direction_content">
+                             <button type="button" class="btn">Sushi</button>
+                             <button type="button" class="btn">Bobble Tea</button>
+                             </div>
+                        </div>*@
                     </div>
                 </div>
-                <div class="row">
-                    @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model)
-                </div>
-                
             </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.Issushi == true))
+            </div>
+
+        </div>
+        <div class="mp-body">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">Bobba</h1>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.Ismilktea == true))
+            </div>
+
+        </div>
         <div class="mp-banner">
             <img src="~/img/Slide.png" alt="" />
         </div>
@@ -56,8 +71,8 @@
     @*<footer class="mp-footer">
 
         </footer>*@
-    <script src="js/libs/jquery-1.11.2.min.js"></script>
-    <script src="js/libs/bootstrap.min.js"></script>
-    <script src="js/functions.js"></script>
+    <script src="~/js/libs/jquery-1.11.2.min.js"></script>
+    <script src="~/js/libs/bootstrap.min.js"></script>
+    <script src="~/js/functions.js"></script>
 </body>
 </html>
