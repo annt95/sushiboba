@@ -15,7 +15,7 @@ namespace FrontEnd.Models
         {
             _bobadb = bobaContext;
         }
-        public List<Menu> GetListShopeeItem()
+        public List<Menu> GetListItem()
         {
             var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetData]")
                        .ExecuteStoredProc<Menu>();

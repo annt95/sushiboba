@@ -15,7 +15,13 @@
     @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/style.css" />*@
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
+        
+    </style>
 </head>
 <body>
     <main id="menu-page">
@@ -31,9 +37,9 @@
             </ol>
         </nav>
         <div class="mp-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
+            <div class="container" id="sushi">
+                <div class="row" >
+                    <div class="col-lg-8 col-lg-offset-2" >
                         <h1 class="mp-heading">Sushi</h1>
                         @*<div class="mp-direction">
                              <div class="mp-direction_content">
@@ -44,23 +50,68 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" >
                 @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.Issushi == true))
             </div>
 
         </div>
         <div class="mp-body">
+            <div class="container" id="bubbletea">
+
+                <div class="row" >
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">Milk/Ice Tea Collection</h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 2))
+            </div>
+
+        </div>
+        @*<div class="mp-body">
             <div class="container">
-                
+
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h1 class="mp-heading">Bobba</h1>
-                        
+                        <h1 class="mp-heading">Ice Tea Collection</h1>
+
                     </div>
                 </div>
             </div>
             <div class="row">
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.Ismilktea == true))
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 3))
+            </div>
+
+        </div>*@
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">Mustache Tea Collection</h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 3))
+            </div>
+
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">Smoothie Tea Collection</h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 4))
             </div>
 
         </div>

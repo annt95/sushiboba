@@ -15,5 +15,6 @@ namespace FrontEnd.Models
         public bool? Issushi { get; set; }
         public bool? Ismilktea { get; set; }
         public bool? Isdelete { get; set; }
+        public int CateID { get; set; }
     }
 }
