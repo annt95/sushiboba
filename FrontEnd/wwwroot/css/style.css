@@ -3782,6 +3782,7 @@ body.home-page #header-wrapper {
     text-transform: uppercase;
     font-weight: 400;
     margin: 0 auto 40px;
+    padding-top: 40px;
 }
 
     .mp-heading:before, .mp-heading:after {
