@@ -38,9 +38,9 @@
         </nav>
         <div class="mp-body">
             <div class="container" id="sushi">
-                <div class="row" >
-                    <div class="col-lg-8 col-lg-offset-2" >
-                        <h1 class="mp-heading">Sushi</h1>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">Forretter</h1>
                         @*<div class="mp-direction">
                              <div class="mp-direction_content">
                              <button type="button" class="btn">Sushi</button>
@@ -50,23 +50,151 @@
                     </div>
                 </div>
             </div>
-            <div class="row" >
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.Issushi == true))
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 1).OrderByDescending(s => s.Ishot))
             </div>
 
         </div>
         <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Sushi Kombo
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 6).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Futo Maki
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 7).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Citys Maki
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 8).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            City's Wok
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 9).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Extra
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 10).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Nigiri
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 11).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Drink
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 12).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="mp-heading">
+                            Fixed Combo
+                        </h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 13).OrderByDescending(s => s.Ishot))
+            </div>
+        </div>
+        <div class="mp-body">
             <div class="container" id="bubbletea">
 
-                <div class="row" >
+                <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <h1 class="mp-heading">Milk Tea Collection</h1>
 
                     </div>
                 </div>
             </div>
-            <div class="row" >
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 2))
+            <div class="row">
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 2).OrderByDescending(s => s.Ishot))
             </div>
 
         </div>
@@ -81,7 +209,7 @@
                 </div>
             </div>
             <div class="row">
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 3))
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 3).OrderByDescending(s => s.Ishot))
             </div>
         </div>
         <div class="mp-body">
@@ -95,7 +223,7 @@
                 </div>
             </div>
             <div class="row">
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 4))
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 4).OrderByDescending(s => s.Ishot))
             </div>
 
         </div>
@@ -110,7 +238,7 @@
                 </div>
             </div>
             <div class="row">
-                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 5))
+                @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 5).OrderByDescending(s => s.Ishot))
             </div>
 
         </div>
