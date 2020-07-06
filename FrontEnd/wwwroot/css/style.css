@@ -3803,7 +3803,10 @@ body.home-page #header-wrapper {
 .mp-direction {
     margin-bottom: 30px;
 }
-
+.mp-body .row {
+    display: flex;
+    flex-wrap: wrap;
+}
 .mp-direction_tab {
     margin-bottom: 20px;
 }
