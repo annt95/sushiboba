@@ -11,6 +11,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    @Html.Partial("_Favicons")
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Css -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700&display=swap&subset=vietnamese" rel="stylesheet">
@@ -114,6 +115,18 @@
 
                                     <div class="col-xs-4 animation-area home-coffee-item ">
                                         <div class="ani-fade-item">
+                                            <a >
+                                                <div class="image-container">
+                                                    <img src="~/img/blank-120.png" />
+                                                    <div class="text">
+                                                        <h3></h3>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 animation-area home-coffee-item ">
+                                        <div class="ani-fade-item">
                                             <a href="~/menu#bubbletea">
                                                 <div class="image-container">
                                                     <img src="~/img/milktea2.png" />
@@ -125,18 +138,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-4 animation-area home-coffee-item ">
-                                        <div class="ani-fade-item">
-                                            <a href="~/menu">
-                                                <div class="image-container">
-                                                    <img src="~/img/sushi4.png" />
-                                                    <div class="text move-text-left">
-                                                        <h3>Warehouse supplies</h3>
+                                    @*<div class="col-xs-4 animation-area home-coffee-item ">
+                                            <div class="ani-fade-item">
+                                                <a href="~/menu">
+                                                    <div class="image-container">
+                                                        <img src="~/img/sushi4.png" />
+                                                        <div class="text move-text-left">
+                                                            <h3>Warehouse supplies</h3>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
@@ -148,7 +161,7 @@
                                 <div class="title-row-container">
                                     <div class="title-row">
                                         <div class="section-title type-flower">
-                                            <h1>Services</h1>
+                                            <h2>Services</h2>
                                         </div>
 
                                         <div class="content">
@@ -390,11 +403,11 @@
                                         <ul>
                                             <li><a href="~/menu#sushi">Sushi</a></li>
                                             <li><a href="~/menu#bubbletea">Bubble tea</a></li>
-                                            <li>
+                                            @*<li>
                                                 <a href="#">
                                                     Warehouse supplies
                                                 </a>
-                                            </li>
+                                            </li>*@
                                             @*<li><a href="#">Barista class</a></li>
                                                 <li><a href="#">Bakery class</a></li>*@
                                         </ul>
@@ -403,20 +416,20 @@
                             </div>
 
                             @*<div class="footer-nav-item">
-                                <div class="common-footer-list">
-                                    <div class="title font-type2">
-                                        <h4>Our Locations</h4>
+                                    <div class="common-footer-list">
+                                        <div class="title font-type2">
+                                            <h4>Our Locations</h4>
+                                        </div>
+                                        <div class="content">
+                                            <ul>
+                                                <li><a href="#">- Skippergata 32, 0154 Oslo Norway</a></li>
+                                                <li><a href="#">- Drammensveien 201, 3420 Lierskogen Norway</a></li>
+                                                <li><a href="#">- Strømsveien 47, 2010 Strømmen Norway</a></li>
+
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="content">
-                                        <ul>
-                                            <li><a href="#">- Skippergata 32, 0154 Oslo Norway</a></li>
-                                            <li><a href="#">- Drammensveien 201, 3420 Lierskogen Norway</a></li>
-                                            <li><a href="#">- Strømsveien 47, 2010 Strømmen Norway</a></li>
-                                          
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                         </div>
                     </div>
                 </div>
@@ -430,7 +443,7 @@
                     <a href="#" class="cs-popup_close"><img src="img/cancel.png" alt=""></a>
                 </div>*@
             <div class="cs-popup_title">
-                <h1 class="cs-popup_heading">Choose your country</h1>
+                <h2 class="cs-popup_heading">Choose your country</h2>
             </div>
             <div class="cs-popup_menu">
                 <div class="cs-popup_col">

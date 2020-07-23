@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bobacha</title>
     @RenderSection("header", required: false)
+	 @Html.Partial("_Favicons")
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Css -->
@@ -17,7 +18,7 @@
     <header>
         <div class="container">
             <div class="mp-header_wrapper">
-                <a href="#" class="mp-header_logo">
+                <a href="/" class="mp-header_logo">
                     <img src="~/img/sushiwok-logo.png" alt="" />
                 </a>
                 @*<a href="#" class="mp-header_logo">
