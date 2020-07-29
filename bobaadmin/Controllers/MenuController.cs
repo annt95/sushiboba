@@ -13,7 +13,14 @@ namespace bobaadmin
     [Authorize]
     public class MenuController : Controller
     {
-        MyDbContext db = new MyDbContext();
+        public MenuController(BobaDA bobaDA)
+        {
+            this.bobaDA = bobaDA; ;
+        }
+
+        private BobaDA bobaDA;
+        //MyDbContext db = new MyDbContext();
+        bobachaContext db = new bobachaContext();
         //public IActionResult Index()
         //{
         //    return View();
@@ -52,28 +59,34 @@ namespace bobaadmin
             var results = db.vw_menuadmin;
             return results;
         }
-        public AdminModel GetArticleById(int Id)
+        public Menu GetArticleById(int Id)
         {
-            var result = new AdminModel();
+            //var result = new AdminModel();
 
-           // var query = db.Database.SqlQuery<Menu>("exec [dbo].[db] @Id", new SqlParameter("Id", Id));
-            var query = db.LoadStoredProc("[GetMenuId]")                    
-                       .WithSqlParam("@Id", Id)
-                       .ExecuteStoredProc<Menu>();
-            result.Menu = query.Select(p => new Menu()
-            {
-                Id = p.Id,
+            // var query = db.Database.SqlQuery<Menu>("exec [dbo].[db] @Id", new SqlParameter("Id", Id));
+            //var query = db.LoadStoredProc("[GetMenuId]")                    
+            //           .WithSqlParam("@Id", Id)
+            //           .ExecuteStoredProc<Menu>();
+            //result.Menu = query.Select(p => new Menu()
+            //{
+            //    Id = p.Id,
 
-            }).FirstOrDefault();
-            return result;
+            //}).FirstOrDefault();
+            var data = bobaDA.GetListAdminItembyId(Id);
+            return data;
         }
-        
 
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            var a = db.Menu.Where(s => s.Isdelete != true).ToList();
-            return View(a);
+            var data = bobaDA.GetListAdminItem();
+            return View(data);
         }
+
+        //public ActionResult Index()
+        //{
+        //    var a = db.Menu.Where(s => s.Isdelete != true).ToList();
+        //    return View(a);
+        //}
         public ActionResult Create()
         {
             return View();
@@ -112,6 +125,8 @@ namespace bobaadmin
         }
         public ActionResult Update(int id)
         {
+            var data = bobaDA.GetListAdminItembyId(id);
+            return View(data);
             return View(db.Menu.Where(s => s.Id == id).First());
         }
         [HttpPost]

@@ -3,15 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sushiboba", "sushiboba\sushiboba.csproj", "{894E6223-CF44-4066-A52B-A34656F208F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "admin", "admin\admin.csproj", "{F91190C1-7CBD-4668-9EF8-6BCCB4691958}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bobaadmin", "bobaadmin\bobaadmin.csproj", "{F0FA49BD-F4D1-4E33-933C-D39FDCA866C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRUD Operations", "..\..\..\Downloads\Asp.Net-Core-CRUD-Operations-using-Admin-Template-master\Asp.Net-Core-CRUD-Operations-using-Admin-Template-master\CRUD Operations.csproj", "{515644E5-5366-4CFC-AC69-BF87A9642127}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{76F4F428-0CAC-41DA-B2EF-35A280E4DC73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{76F4F428-0CAC-41DA-B2EF-35A280E4DC73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,22 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{894E6223-CF44-4066-A52B-A34656F208F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{894E6223-CF44-4066-A52B-A34656F208F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{894E6223-CF44-4066-A52B-A34656F208F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{894E6223-CF44-4066-A52B-A34656F208F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F91190C1-7CBD-4668-9EF8-6BCCB4691958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F91190C1-7CBD-4668-9EF8-6BCCB4691958}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F91190C1-7CBD-4668-9EF8-6BCCB4691958}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F91190C1-7CBD-4668-9EF8-6BCCB4691958}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0FA49BD-F4D1-4E33-933C-D39FDCA866C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0FA49BD-F4D1-4E33-933C-D39FDCA866C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0FA49BD-F4D1-4E33-933C-D39FDCA866C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0FA49BD-F4D1-4E33-933C-D39FDCA866C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{515644E5-5366-4CFC-AC69-BF87A9642127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{515644E5-5366-4CFC-AC69-BF87A9642127}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{515644E5-5366-4CFC-AC69-BF87A9642127}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{515644E5-5366-4CFC-AC69-BF87A9642127}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76F4F428-0CAC-41DA-B2EF-35A280E4DC73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76F4F428-0CAC-41DA-B2EF-35A280E4DC73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F4F428-0CAC-41DA-B2EF-35A280E4DC73}.Release|Any CPU.ActiveCfg = Release|Any CPU

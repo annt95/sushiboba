@@ -25,7 +25,8 @@ namespace bobaadmin
         private readonly ILogger<LogoutModel> _logger;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        MyDbContext db = new MyDbContext();
+        //MyDbContext db = new MyDbContext();
+        bobachaContext db = new bobachaContext();
         public IActionResult Login()
         {
             //ViewBag.Message = HttpContext.Session.GetString("username");

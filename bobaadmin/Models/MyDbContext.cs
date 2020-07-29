@@ -19,19 +19,19 @@ namespace bobaadmin.Models
         public virtual DbSet<Menu> Menu { get; set; }
 
 
-        
+
         public virtual DbSet<Cate> Cate { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<Mapmenu> Mapmenu { get; set; }
         public virtual DbQuery<MenuItems> vw_menuadmin { get; set; }
         public virtual DbQuery<MenuItems> MenuItems { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=localhost;User Id=sa;Password=sushiadmin;Database=bobacha;");
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Server=localhost;User Id=sa;Password=sushiadmin;Database=bobacha;");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -82,4 +82,5 @@ namespace bobaadmin.Models
             });
         }
     }
+
 }

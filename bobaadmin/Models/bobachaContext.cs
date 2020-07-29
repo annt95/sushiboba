@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FrontEnd.Models
+namespace bobaadmin.Models
 {
     public partial class bobachaContext : DbContext
     {
@@ -17,13 +17,13 @@ namespace FrontEnd.Models
 
         public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
-
+        public virtual DbQuery<MenuItems> vw_menuadmin { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
-
+            modelBuilder.Query<MenuItems>().ToView("vw_menuadmin");
             modelBuilder.Entity<Admins>(entity =>
             {
                 entity.ToTable("admins");

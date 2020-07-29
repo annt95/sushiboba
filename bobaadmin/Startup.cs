@@ -19,17 +19,22 @@ namespace bobaadmin
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services )
         {
-            
-            //            services.AddDbContext<MyDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("BobaConnection")));
+
+            services.AddDbContext<bobachaContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("BobaConnection")));
             services.Configure<CookiePolicyOptions>(options =>
             {
             options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+            services.AddScoped<BobaDA>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
@@ -75,6 +80,7 @@ namespace bobaadmin
                 .MapRoute(name: "Sushi", template: "/menu/sushi", defaults: new { controller = "Menu", action = "Sushi" })
                 .MapRoute(name: "Milktea", template: "/menu/milktea", defaults: new { controller = "Menu", action = "Milktea" })
                 .MapRoute(name: "Menu", template: "menu", defaults: new { controller = "Menu", action = "Index" })
+                .MapRoute(name: "Order", template: "order", defaults: new { controller = "Order", action = "Index" })
                 .MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
