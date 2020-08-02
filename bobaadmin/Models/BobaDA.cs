@@ -29,6 +29,12 @@ namespace bobaadmin.Models
                        .ExecuteStoredProc<Menu>().FirstOrDefault();
             return lst;
         }
-        
+        public List<CountOrder> CountOrder()
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[CountOrder]")
+                       .ExecuteStoredProc<CountOrder>().ToList();
+            return lst;
+        }
+
     }
 }

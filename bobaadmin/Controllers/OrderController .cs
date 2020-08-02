@@ -24,14 +24,15 @@ namespace bobaadmin
         
         public ActionResult Index()
         {
+            var data = bobaDA.CountOrder();
+            ViewBag.NewOrders = data.Count(a => a.StatusID == 1);
+            ViewBag.Making = data.Count(a => a.StatusID == 2);
+            ViewBag.Waiting = data.Count(a => a.StatusID == 3);
+            ViewBag.Done = data.Count(a => a.StatusID == 4);
             return View();
         }
 
-        //public ActionResult Index()
-        //{
-        //    var a = db.Menu.Where(s => s.Isdelete != true).ToList();
-        //    return View(a);
-        //}
+        
         
     }
 }
