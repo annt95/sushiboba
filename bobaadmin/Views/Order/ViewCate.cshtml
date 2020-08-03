@@ -63,19 +63,19 @@
 
                                         @if (item.Status == "Submitted")
                                         {
-                                            <a href="Menu/Update/@item.ID">Confrim</a>
+                                            <a href="Update/@item.ID">Confrim</a>
                                         }
                                         else if (item.Status == "Confirmed")
                                         {
-                                            <a href="Menu/Update/@item.ID">Process</a>
+                                            <a href="Update/@item.ID">Process</a>
                                         }
                                         else if (item.Status == "Processing")
                                         {
-                                            <a href="Menu/Update/@item.ID">Picked</a>
+                                            <a href="Update/@item.ID">Picked</a>
                                         }
                                         else if (item.Status == "Picked")
                                         {
-                                            <a href="Menu/Update/@item.ID">Completed</a>
+                                            <a href="Update/@item.ID">Completed</a>
                                         }
                                         | <a href="" onclick="Delete('@item.ID')">Delete</a>
 

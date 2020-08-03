@@ -36,7 +36,24 @@ namespace bobaadmin
             var data = bobaDA.GetListOrder(stt);
             return View(data);
         }
-
+        public ActionResult Update(int id)
+        {
+            var data = bobaDA.GetListAdminItembyId(id);
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult UpdateOrder(Menu menu)
+        {
+            Menu d = db.Menu.Where(s => s.Id == menu.Id).First();
+            d.Price = menu.Price;
+            d.Description = menu.Description;
+            d.Images = menu.Images;
+            d.Name = menu.Name;
+            d.Issushi = menu.Issushi;
+            d.Ismilktea = menu.Ismilktea;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Menu");
+        }
 
 
     }
