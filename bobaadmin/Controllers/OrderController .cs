@@ -15,7 +15,7 @@ namespace bobaadmin
     {
         public OrderController (BobaDA bobaDA)
         {
-            this.bobaDA = bobaDA; ;
+            this.bobaDA = bobaDA; 
         }
 
         private BobaDA bobaDA;
@@ -26,13 +26,18 @@ namespace bobaadmin
         {
             var data = bobaDA.CountOrder();
             ViewBag.NewOrders = data.Count(a => a.StatusID == 1);
-            ViewBag.Making = data.Count(a => a.StatusID == 2);
-            ViewBag.Waiting = data.Count(a => a.StatusID == 3);
+            ViewBag.Confirmed= data.Count(a => a.StatusID == 2);
+            ViewBag.Processing= data.Count(a => a.StatusID == 3);
             ViewBag.Done = data.Count(a => a.StatusID == 4);
             return View();
         }
+        public IActionResult ViewCate(string stt)
+        {
+            var data = bobaDA.GetListOrder(stt);
+            return View(data);
+        }
 
-        
-        
+
+
     }
 }

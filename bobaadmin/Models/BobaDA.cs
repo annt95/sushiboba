@@ -22,11 +22,25 @@ namespace bobaadmin.Models
                        .ExecuteStoredProc<Menu>();
             return lst.ToList();
         }
+        public List<OrderView> GetListOrder(string stt)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetOrderbystt]")
+                        .WithSqlParam("@stt", stt)
+                       .ExecuteStoredProc<OrderView>();
+            return lst.ToList();
+        }
         public Menu GetListAdminItembyId(int ID)
         {
             var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetDataAdmin]")
                     .WithSqlParam("@ID", Convert.ToInt64(ID))
                        .ExecuteStoredProc<Menu>().FirstOrDefault();
+            return lst;
+        }
+        public Admins CheckAccount(string username)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[PRC_CheckAccount]")
+                    .WithSqlParam("@username", username)
+                       .ExecuteStoredProc<Admins>().FirstOrDefault();
             return lst;
         }
         public List<CountOrder> CountOrder()

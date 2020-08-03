@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\Doctors.cs" />
+    <Compile Remove="Models\UserService.cs" />
   </ItemGroup>
 
   <ItemGroup>

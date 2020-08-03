@@ -81,6 +81,7 @@ namespace bobaadmin
                 .MapRoute(name: "Milktea", template: "/menu/milktea", defaults: new { controller = "Menu", action = "Milktea" })
                 .MapRoute(name: "Menu", template: "menu", defaults: new { controller = "Menu", action = "Index" })
                 .MapRoute(name: "Order", template: "order", defaults: new { controller = "Order", action = "Index" })
+                .MapRoute(name: "OrderView", template: "order/{stt}", defaults: new { controller = "Order", action = "ViewCate" })
                 .MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

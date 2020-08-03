@@ -61,17 +61,7 @@ namespace bobaadmin
         }
         public Menu GetArticleById(int Id)
         {
-            //var result = new AdminModel();
 
-            // var query = db.Database.SqlQuery<Menu>("exec [dbo].[db] @Id", new SqlParameter("Id", Id));
-            //var query = db.LoadStoredProc("[GetMenuId]")                    
-            //           .WithSqlParam("@Id", Id)
-            //           .ExecuteStoredProc<Menu>();
-            //result.Menu = query.Select(p => new Menu()
-            //{
-            //    Id = p.Id,
-
-            //}).FirstOrDefault();
             var data = bobaDA.GetListAdminItembyId(Id);
             return data;
         }
