@@ -26,9 +26,9 @@ namespace bobaadmin
         {
             var data = bobaDA.CountOrder();
             ViewBag.NewOrders = data.Count(a => a.StatusID == 1);
-            ViewBag.Confirmed= data.Count(a => a.StatusID == 2);
-            ViewBag.Processing= data.Count(a => a.StatusID == 3);
-            ViewBag.Done = data.Count(a => a.StatusID == 4);
+            ViewBag.Processing= data.Count(a => a.StatusID == 2);
+            ViewBag.Picked= data.Count(a => a.StatusID == 3);
+            ViewBag.Completed = data.Count(a => a.StatusID == 4);
             return View();
         }
         public IActionResult ViewCate(string stt)
