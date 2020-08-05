@@ -21,13 +21,27 @@ namespace bobaadmin.Models
             var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetDataAdmin]")
                        .ExecuteStoredProc<Menu>();
             return lst.ToList();
+        }public List<OrderDetailItems> GetListOrderItembyId(int id)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[ViewOrderItems]")
+                .WithSqlParam("@ID", id)
+                       .ExecuteStoredProc<OrderDetailItems>();
+            return lst.ToList();
         }
+        
         public List<OrderView> GetListOrder(string stt)
         {
             var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetOrderbystt]")
                         .WithSqlParam("@stt", stt)
                        .ExecuteStoredProc<OrderView>();
             return lst.ToList();
+        }
+        public OrderView GetOrder(int id)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetOrderbyID]")
+                        .WithSqlParam("@ID", id)
+                       .ExecuteStoredProc<OrderView>().FirstOrDefault();
+            return lst;
         }
         public Menu GetListAdminItembyId(int ID)
         {

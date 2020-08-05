@@ -117,7 +117,6 @@ namespace bobaadmin
         {
             var data = bobaDA.GetListAdminItembyId(id);
             return View(data);
-            return View(db.Menu.Where(s => s.Id == id).First());
         }
         [HttpPost]
         public ActionResult UpdateMenu(Menu menu)

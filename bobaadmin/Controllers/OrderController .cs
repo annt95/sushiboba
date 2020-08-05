@@ -36,10 +36,19 @@ namespace bobaadmin
             var data = bobaDA.GetListOrder(stt);
             return View(data);
         }
-        public ActionResult Update(int id)
+        public IActionResult Update(int id)
         {
-            var data = bobaDA.GetListAdminItembyId(id);
-            return View(data);
+            var dataItem = new OrderDetail();
+            var dataOrder = bobaDA.GetOrder(id);
+            ViewBag.OrderID = dataOrder.ID;
+            ViewBag.OrderTime = dataOrder.OrderTime;
+            ViewBag.CustomerName = dataOrder.CustomerName;
+            ViewBag.CustomerPhone = dataOrder.CustomerPhone;
+            ViewBag.TotalMoney = dataOrder.TotalMoney;
+            ViewBag.Note = dataOrder.Note;
+            ViewBag.ShippingType = dataOrder.ShippingType;
+            dataItem.items = bobaDA.GetListOrderItembyId(id);
+            return View(dataItem);
         }
         [HttpPost]
         public ActionResult UpdateOrder(Menu menu)

@@ -1,34 +1,33 @@
-﻿@model bobaadmin.Models.Menu
+﻿@model bobaadmin.Models.OrderDetail
 @{
     ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-    <section class="content-header">
-        <h1>
-            Order
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/Order">Order</a></li>
-            <li class="active">Details</li>
-        </ol>
-    </section>
+<section class="content-header">
+    <h1>
+        OrderID: @ViewBag.OrderID
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="/Order">Order</a></li>
+        <li class="active">Details</li>
+    </ol>
+</section>
 <section class="invoice">
     <div class="row">
         <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
-                From
-                <address>
-                    <strong>Admin, Inc.</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (804) 123-5432<br>
-                    Email: info@almasaeedstudio.com
-                </address>
+                OrderID: <strong>@ViewBag.OrderID</strong><br>
+                OrderTime: @ViewBag.OrderTime<br>
+                CustomerName: @ViewBag.CustomerName<br>
+                CustomerPhone: @ViewBag.CustomerPhone<br>
+                TotalMoney: @ViewBag.TotalMoney<br>
+                ShippingType: @ViewBag.ShippingType<br>
+                Note: @ViewBag.Note<br>
+
             </div>
             <!-- /.col -->
-            
             <!-- /.col -->
         </div>
         <div class="col-xs-12">
@@ -38,42 +37,26 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
+                    <table id="orderdetail" class="table table-hover">
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Reason</th>
+                            <th>ItemID</th>
+                            <th>ItemName</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            @*<th>Status</th>
+                                <th>Reason</th>*@
                         </tr>
-                        <tr>
-                            <td>183</td>
-                            <td>John Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-success">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>219</td>
-                            <td>Alexander Pierce</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-warning">Pending</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>657</td>
-                            <td>Bob Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-primary">Approved</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                            <td>175</td>
-                            <td>Mike Doe</td>
-                            <td>11-7-2014</td>
-                            <td><span class="label label-danger">Denied</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
+                        @foreach (var item in Model.items)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Price) kr</td>
+                                @*<td><span class="label label-success">Approved</span></td>
+                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>*@
+                            </tr>
+                        }
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -82,3 +65,39 @@
         </div>
     </div>
 </section>
+<script>
+    $(function () {
+        $('#orderdetail').DataTable(
+            {
+                                        "order": [[ 0, "desc" ]]
+        }
+        );
+                                });
+                                function Delete(id){
+                                    var txt;
+                                    var r = confirm("Are you sure you want to Delete?");
+                                    if (r == true) {
+
+            $.ajax(
+                                        {
+                                        type: "POST",
+                url: '@Url.Action("Delete", "Menu")',
+                data: {
+                                            id: id
+                },
+                error: function (result) {
+                                                alert("error");
+                                            },
+                success: function (result) {
+                                                if (result == true) {
+                                                    var baseUrl="/Menu";
+                                                    window.location.reload();
+                                                }
+                                                else {
+                                                    alert("There is a problem, Try Later!");
+                                                }
+                                            }
+                                        });
+                            }
+                        }
+</script>
