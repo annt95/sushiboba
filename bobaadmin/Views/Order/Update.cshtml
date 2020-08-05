@@ -2,8 +2,12 @@
 @{
     ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    <script src="~/js/jquery-3.4.1.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/dataTables.bootstrap.min.js"></script>
 }
+
 <section class="content-header">
     <h1>
         OrderID: @ViewBag.OrderID
@@ -43,8 +47,6 @@
                             <th>ItemName</th>
                             <th>Quantity</th>
                             <th>Price</th>
-                            @*<th>Status</th>
-                                <th>Reason</th>*@
                         </tr>
                         @foreach (var item in Model.items)
                         {
@@ -53,8 +55,6 @@
                                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Price) kr</td>
-                                @*<td><span class="label label-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>*@
                             </tr>
                         }
                     </table>
@@ -63,41 +63,43 @@
             </div>
             <!-- /.box -->
         </div>
+        <div class="box-footer clearfix">
+            <button class="btn btn-sm btn-info btn-flat pull-left" type="button" id="btnaccept" onclick="accept()">Accept</button>
+            <button class="btn btn-sm btn-warning btn-flat pull-right" type="button" id="btncancel" onclick="myFunction()">Delete</button>
+            
+        </div>
     </div>
 </section>
 <script>
     $(function () {
         $('#orderdetail').DataTable(
             {
-                                        "order": [[ 0, "desc" ]]
+            "order": [[ 0, "desc" ]]
         }
         );
-                                });
-                                function Delete(id){
-                                    var txt;
-                                    var r = confirm("Are you sure you want to Delete?");
-                                    if (r == true) {
-
-            $.ajax(
-                                        {
-                                        type: "POST",
-                url: '@Url.Action("Delete", "Menu")',
+    });
+    function accept() {
+        var x =@ViewBag.OrderID;
+        
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Accept", "Order")',
                 data: {
-                                            id: id
+                    id: x
                 },
                 error: function (result) {
-                                                alert("error");
-                                            },
+                    alert("error");
+                },
                 success: function (result) {
-                                                if (result == true) {
-                                                    var baseUrl="/Menu";
-                                                    window.location.reload();
-                                                }
-                                                else {
-                                                    alert("There is a problem, Try Later!");
-                                                }
-                                            }
-                                        });
-                            }
-                        }
+                    if (result == true) {
+                        var baseUrl="/Order";
+                        window.location.reload();
+                    }
+                    else {
+                        alert("There is a problem, Try Later!");
+                    }
+                }
+            });
+}
 </script>

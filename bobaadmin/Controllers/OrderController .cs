@@ -64,6 +64,11 @@ namespace bobaadmin
             return RedirectToAction("Index", "Menu");
         }
 
-
+        [HttpPost]
+        public ActionResult Accept(string id)
+        {
+            var a = 1;
+            return RedirectToAction("Index", "Menu");
+        }
     }
 }

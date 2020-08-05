@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-
-
 <script src="~/js/jquery-3.4.1.js"></script>
 <script src="~/js/bootstrap.min.js"></script>
 <script src="~/js/jquery.dataTables.min.js"></script>
@@ -71,11 +69,11 @@
                                         }
                                         else if (item.Status == "Processing")
                                         {
-                                            <a href="Update/@item.ID">Picked</a>
+                                            <a href="Update/@item.ID">Pick</a>
                                         }
                                         else if (item.Status == "Picked")
                                         {
-                                            <a href="Update/@item.ID">Completed</a>
+                                            <a href="Update/@item.ID">Complete</a>
                                         }
                                         | <a href="" onclick="Delete('@item.ID')">Delete</a>
 
@@ -110,7 +108,7 @@
             $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("Delete", "Menu")',
+                url: '@Url.Action("Delete", "Order")',
                 data: {
                     id: id
                 },
