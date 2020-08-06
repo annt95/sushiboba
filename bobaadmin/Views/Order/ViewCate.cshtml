@@ -42,6 +42,7 @@
                                 <th>Note</th>
                                 <th>Status</th>
                                 <th>ShippingType</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,24 +59,22 @@
                                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ShippingType)</td>
                                     <td>
-
                                         @if (item.Status == "Submitted")
                                         {
-                                            <a href="Update/@item.ID">Confrim</a>
+                                            <a href="Update/@item.ID">Confrim</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
                                         }
                                         else if (item.Status == "Confirmed")
                                         {
-                                            <a href="Update/@item.ID">Process</a>
+                                            <a href="Update/@item.ID">Process</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
                                         }
                                         else if (item.Status == "Processing")
                                         {
-                                            <a href="Update/@item.ID">Pick</a>
+                                            <a href="Update/@item.ID">Pick</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
                                         }
-                                        else if (item.Status == "Picked")
+                                        else if (item.Status == "Completed")
                                         {
-                                            <a href="Update/@item.ID">Complete</a>
+                                            @*<a href="/Update/@item.ID">Update</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>*@
                                         }
-                                        | <a href="" onclick="Delete('@item.ID')">Delete</a>
 
                                     </td>
                                 </tr>

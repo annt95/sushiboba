@@ -63,6 +63,12 @@ namespace bobaadmin.Models
                        .ExecuteStoredProc<CountOrder>().ToList();
             return lst;
         }
-
+        public void UpdateOrder(int ID,int statusid)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[UpdateOrder]")
+                        .WithSqlParam("@ID", ID)
+                        .WithSqlParam("@StatusID", statusid)
+                       .ExecuteStoredProc<CountOrder>();
+        }
     }
 }

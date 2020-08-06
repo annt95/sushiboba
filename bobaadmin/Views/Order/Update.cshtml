@@ -29,7 +29,7 @@
                 TotalMoney: @ViewBag.TotalMoney<br>
                 ShippingType: @ViewBag.ShippingType<br>
                 Note: @ViewBag.Note<br>
-
+                <br />
             </div>
             <!-- /.col -->
             <!-- /.col -->
@@ -42,21 +42,24 @@
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table id="orderdetail" class="table table-hover">
-                        <tr>
-                            <th>ItemID</th>
-                            <th>ItemName</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                        @foreach (var item in Model.items)
-                        {
+                        <thead>
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Price) kr</td>
+                                <th>ItemID</th>
+                                <th>ItemName</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.items)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price) kr</td>
+                                </tr>
+                            }
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -66,7 +69,7 @@
         <div class="box-footer clearfix">
             <button class="btn btn-sm btn-info btn-flat pull-left" type="button" id="btnaccept" onclick="accept()">Accept</button>
             <button class="btn btn-sm btn-warning btn-flat pull-right" type="button" id="btncancel" onclick="myFunction()">Delete</button>
-            
+
         </div>
     </div>
 </section>
@@ -79,14 +82,16 @@
         );
     });
     function accept() {
+        debugger;
         var x =@ViewBag.OrderID;
-        
+        var y =@ViewBag.StatusID;
         $.ajax(
             {
                 type: "POST",
                 url: '@Url.Action("Accept", "Order")',
                 data: {
-                    id: x
+                    id: x,
+                    sttid: y
                 },
                 error: function (result) {
                     alert("error");

@@ -25,10 +25,10 @@ namespace bobaadmin
         public ActionResult Index()
         {
             var data = bobaDA.CountOrder();
-            ViewBag.NewOrders = data.Count(a => a.StatusID == 1);
-            ViewBag.Processing= data.Count(a => a.StatusID == 2);
-            ViewBag.Picked= data.Count(a => a.StatusID == 3);
-            ViewBag.Completed = data.Count(a => a.StatusID == 4);
+            ViewBag.NewOrders = data.Where(st => st.StatusID == 1).Select(s => s.Count).FirstOrDefault();
+            ViewBag.Processing= data.Where(s => s.StatusID == 2).Select(s => s.Count).FirstOrDefault();
+            ViewBag.Picked= data.Where(s => s.StatusID == 3).Select(s => s.Count).FirstOrDefault();
+            ViewBag.Completed = data.Where(s => s.StatusID == 4).Select(s => s.Count).FirstOrDefault();
             return View();
         }
         public IActionResult ViewCate(string stt)
@@ -47,6 +47,7 @@ namespace bobaadmin
             ViewBag.TotalMoney = dataOrder.TotalMoney;
             ViewBag.Note = dataOrder.Note;
             ViewBag.ShippingType = dataOrder.ShippingType;
+            ViewBag.StatusID = dataOrder.StatusID;
             dataItem.items = bobaDA.GetListOrderItembyId(id);
             return View(dataItem);
         }
@@ -61,14 +62,15 @@ namespace bobaadmin
             d.Issushi = menu.Issushi;
             d.Ismilktea = menu.Ismilktea;
             db.SaveChanges();
-            return RedirectToAction("Index", "Menu");
+            return RedirectToAction("Index", "Order");
         }
 
         [HttpPost]
-        public ActionResult Accept(string id)
+        public ActionResult Accept(int id, int sttid)
         {
-            var a = 1;
-            return RedirectToAction("Index", "Menu");
+            var statusid = sttid + 1;
+            bobaDA.UpdateOrder(id, statusid);
+            return RedirectToAction("Index", "Order");
         }
     }
 }

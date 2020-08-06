@@ -14,6 +14,7 @@ namespace bobaadmin.Models
         public string Note { get; set; }
         public string Status { get; set; }
         public string ShippingType { get; set; }
+        public int StatusID { get; set; }
         
     }
 }
