@@ -68,7 +68,7 @@
         </div>
         <div class="box-footer clearfix">
             <button class="btn btn-sm btn-info btn-flat pull-left" type="button" id="btnaccept" onclick="accept()">Accept</button>
-            <button class="btn btn-sm btn-warning btn-flat pull-right" type="button" id="btncancel" onclick="myFunction()">Delete</button>
+            <button class="btn btn-sm btn-warning btn-flat pull-right" type="button" id="btncancel" onclick="cancel()">Cancel</button>
 
         </div>
     </div>
@@ -82,7 +82,7 @@
         );
     });
     function accept() {
-        debugger;
+        
         var x =@ViewBag.OrderID;
         var y =@ViewBag.StatusID;
         $.ajax(
@@ -93,13 +93,43 @@
                     id: x,
                     sttid: y
                 },
+                
                 error: function (result) {
+                    debugger;
                     alert("error");
                 },
                 success: function (result) {
+                    debugger;
                     if (result == true) {
                         var baseUrl="/Order";
-                        window.location.reload();
+                        window.location=document.referrer;
+                    }
+                    else {
+                        alert("There is a problem, Try Later!");
+                    }
+                }
+            });
+    }
+    function cancel() {
+        
+        var x =@ViewBag.OrderID;
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Cancel", "Order")',
+                data: {
+                    id: x
+                },
+                
+                error: function (result) {
+                    debugger;
+                    alert("error");
+                },
+                success: function (result) {
+                    debugger;
+                    if (result == true) {
+                        var baseUrl="/Order";
+                        window.location=document.referrer;
                     }
                     else {
                         alert("There is a problem, Try Later!");

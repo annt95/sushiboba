@@ -61,15 +61,15 @@
                                     <td>
                                         @if (item.Status == "Submitted")
                                         {
-                                            <a href="Update/@item.ID">Confrim</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
-                                        }
-                                        else if (item.Status == "Confirmed")
-                                        {
                                             <a href="Update/@item.ID">Process</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
                                         }
                                         else if (item.Status == "Processing")
                                         {
                                             <a href="Update/@item.ID">Pick</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
+                                        }
+                                        else if (item.Status == "Picked")
+                                        {
+                                    <a href="Update/@item.ID">Complete</a> @:| <a href="" onclick="Delete('@item.ID')">Cancel</a>
                                         }
                                         else if (item.Status == "Completed")
                                         {
@@ -107,7 +107,7 @@
             $.ajax(
             {
                 type: "POST",
-                url: '@Url.Action("Delete", "Order")',
+                url: '@Url.Action("Cancel", "Order")',
                 data: {
                     id: id
                 },
@@ -115,7 +115,7 @@
                     alert("error");
                 },
                 success: function (result) {
-                    if (result == true) {
+                    if (result.success) {
                         var baseUrl="/Order";
                         window.location.reload();
                     }

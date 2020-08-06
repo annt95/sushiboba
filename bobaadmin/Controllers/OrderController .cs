@@ -70,7 +70,14 @@ namespace bobaadmin
         {
             var statusid = sttid + 1;
             bobaDA.UpdateOrder(id, statusid);
-            return RedirectToAction("Index", "Order");
+            return Json(true);
+        }
+        [HttpPost]
+        public ActionResult Cancel(int id)
+        {
+            var statusid = 6;
+            bobaDA.UpdateOrder(id, statusid);
+            return Json(true);
         }
     }
 }
