@@ -62,6 +62,7 @@ namespace FrontEnd
                 routes
                 .MapRoute(name: "Ajax", template: "Ajax/{Controller}/{action}")
                 .MapRoute(name: "Menu", template: "/menu", defaults: new { controller = "Menu", action = "Home" })
+                .MapRoute(name: "Order", template: "/order/{id?}", defaults: new { controller = "Menu", action = "Home" })
                 .MapRoute(
 
                     name: "default",
