@@ -675,6 +675,10 @@ img {
             color: #3aac5d;
             font-weight: 700;
         }
+        .progressbar li.cancel {
+            color: #d51414;
+            font-weight: 700;
+        }
 
             .progressbar li.active:after, .progressbar li.complete:after {
                 background: #3aac5d;
