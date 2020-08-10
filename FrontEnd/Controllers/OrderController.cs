@@ -20,16 +20,17 @@ namespace FrontEnd.Controllers
         {
             return View();
         }
-        public ActionResult GetMenu()
-        {
-            var view = "GetMenu";
-            var data = bobaDA.GetListItem();
-            return View(view, data);
-        }
+        
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public ActionResult OrderDetail(int id)
+        {
+            var OrderData = bobaDA.GetOrder(id);
+            return View(OrderData);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,99 @@
+﻿@model FrontEnd.Models.OrderView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Menu";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HYMALAYA</title>
+    <link rel="shortcut icon" href="" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;">
+    <div class="step-page-wrapper">
+        <ul class="progressbar">
+            @if (Model.StatusID == 1)
+            {
+                <li class="active">Submitted</li>
+                <li>Processing</li>
+                <li>Delivering</li>
+                <li>Completed</li>
+            }
+            else if (Model.StatusID == 2)
+            {
+                <li class="active">Submitted</li>
+                <li class="active">Processing</li>
+                <li>Delivering</li>
+                <li>Completed</li>
+            }
+            else if (Model.StatusID == 3)
+            {
+                <li class="active">Submitted</li>
+                <li class="active">Processing</li>
+                <li class="active">Delivering</li>
+                <li>Completed</li>
+            }
+            else if (Model.StatusID == 4)
+            {
+                <li class="active">Submitted</li>
+                <li class="active">Processing</li>
+                <li class="active">Delivering</li>
+                <li class="active">Completed</li>
+            }
+
+        </ul>
+        <div class="cs-table-list">
+            <table>
+                <tr>
+                    <td>OrderID</td>
+                    <td>
+                        @Model.ID
+                    </td>
+                </tr>
+                <tr>
+                    <td>Order Time</td>
+                    <td>@Model.OrderTime</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><span>@Model.CustomerName</span></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><span>@Model.CustomerPhone</span></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><span>@Model.Address</span></td>
+                </tr>
+                <tr>
+                    <td>Note</td>
+                    <td>@Model.Note</td>
+                </tr>
+                <tr>
+                    <td>ShippingType</td>
+                    <td>@Model.ShippingType</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>@Model.Status</td>
+                </tr>
+                <tr>
+                    <td>Total Price</td>
+                    <td>@Model.TotalMoney</td>
+                </tr>
+            </table>
+        </div>
+        <p class="para-noti">
+            If customer choose pickup at store, an order will be ready in 17 minutes
+        </p>
+        <div class="button-back">
+            <a href="/" class="button-back__link">Back to home page</a>
+        </div>
+    </div>
+</body>
+</html>

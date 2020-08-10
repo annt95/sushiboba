@@ -21,5 +21,12 @@ namespace FrontEnd.Models
                        .ExecuteStoredProc<Menu>();
             return lst.ToList();
         }
+        public OrderView GetOrder(int id)
+        {
+            var lst = _bobadb.LoadStoredProc("[dbo].[PRC_GetOrderbyID]")
+                        .WithSqlParam("@ID", id)
+                       .ExecuteStoredProc<OrderView>().FirstOrDefault();
+            return lst;
+        }
     }
 }
