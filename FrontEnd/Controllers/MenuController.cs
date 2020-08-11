@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FrontEnd.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FrontEnd.Controllers
 {
@@ -28,6 +30,7 @@ namespace FrontEnd.Controllers
             return View(view, data);
         }
 
+        
         public IActionResult Privacy()
         {
             return View();
