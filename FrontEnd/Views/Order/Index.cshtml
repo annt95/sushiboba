@@ -10,16 +10,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-   
+
 </head>
 <body style="font-family: Arial, Helvetica, sans-serif;">
-    <form >
+    <nav aria-label="breadcrumb" class="mp-breadcrumb clearfix">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Order</li>
+        </ol>
+    </nav>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="search">
+            <input id="ipsearch" type="text" class="form-control" placeholder="Input orderid and click search button..." name="search">
             <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <button id="searchclick" class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
             </div>
         </div>
-    </form>
+    
+    <script>
+        $(function () {
+            $("#searchclick").click(function () {
+                var str = $("#ipsearch").val();
+                var link = '/order/' + str;
+                window.location.assign(link);
+        });
+        });
+    </script>
 </body>
 </html>
