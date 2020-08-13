@@ -624,15 +624,16 @@ img {
     padding: 0;
     margin: 30px auto 0;
     width: 100%;
+    display: flex;
+    justify-content: flex;
 }
 
     .progressbar li {
         padding: 0 2px;
-        float: left;
         list-style: none;
         position: relative;
         text-align: center;
-        width: calc(100% / 5);
+        flex: 1;
         margin-bottom: 30px;
     }
 
