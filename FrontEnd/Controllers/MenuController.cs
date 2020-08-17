@@ -36,7 +36,7 @@ namespace FrontEnd.Controllers
             return View(view, data);
         }
         //ADD CART
-        public IActionResult addCart(int id)
+        public IActionResult addCart(int id,int count)
         {
             var cart = HttpContext.Session.GetString("cart");//get key cart
             if (cart == null)

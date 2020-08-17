@@ -105,5 +105,32 @@ $(window).bind('scroll', function() {
 		$('.mp-header').removeClass('fixed');
 	}
 });
+(function ($) {
+	$(document).ready(function () {
+		$(document).on('click', '.additem', function () {
 
+			//var $form = $(".BillInfo");
+			//var data = getFormData($form);
+			//var rates = document.getElementById('ProviderCode').value;
+			//data.ProviderName = $("#ProviderCode option:selected").html();
+			//var parForm = $(this).parents('.modal-body');
+			//data.typebank = parForm.find(".Bankcode:checked").data("banktype");
+			//data.cardtype = parForm.find(".Bankcode:checked").val(),
+			//$('.ck-poptt-rlbtn').hide();
+			//$('.btn-loading').show();
+			var id = 16;
+			var count = 1;
+			$.ajax({
+				type: "POST",
+				url: '/Ajax/Menu/addCart',
+				data: { id: id, count: count },
+				success: function (odata) {
+					window.location.href = odata;
+				}
+			});
+		});
+
+
+	});
+})(window.jQuery);
 /*-------------------------------- Functions Ends --------------------------------*/
