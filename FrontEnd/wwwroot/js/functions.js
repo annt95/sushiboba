@@ -2,7 +2,7 @@
  * Created by Sushant on 12/14/2017.
  */
 $(document).ready(function() {
-	navInit();
+	
 });
 
 /*------------------------------- Functions Starts -------------------------------*/
@@ -107,23 +107,32 @@ $(window).bind('scroll', function() {
 });
 (function ($) {
 	$(document).ready(function () {
+		navInit();
+		// for modal
+		$('.button-test-modal').click(function () {
+			$('.cs-modal').fadeIn(300);
+			$('body').addClass('.cs-modal--open');
+		});
+		$('.cs-modal').click(function (e) {
+			if (e.target != this) return;
+			$(this).hide();
+		});
+		$('.js-modal--close').click(function (e) {
+			e.preventDefault();
+			$('.cs-modal').hide();
+		});
 		$(document).on('click', '.additem', function () {
-
-			//var $form = $(".BillInfo");
-			//var data = getFormData($form);
-			//var rates = document.getElementById('ProviderCode').value;
-			//data.ProviderName = $("#ProviderCode option:selected").html();
-			//var parForm = $(this).parents('.modal-body');
-			//data.typebank = parForm.find(".Bankcode:checked").data("banktype");
-			//data.cardtype = parForm.find(".Bankcode:checked").val(),
-			//$('.ck-poptt-rlbtn').hide();
-			//$('.btn-loading').show();
-			var id = 16;
+			debugger;
+			event.preventDefault();
+			var id = $(this).data('id');
+			var price = $(this).data('price');
+			//var price = Number($(this).data('price'));
+			//var id = 16;
 			var count = 1;
 			$.ajax({
 				type: "POST",
 				url: '/Ajax/Menu/addCart',
-				data: { id: id, count: count },
+				data: { id: id, price: price },
 				success: function (odata) {
 					window.location.href = odata;
 				}

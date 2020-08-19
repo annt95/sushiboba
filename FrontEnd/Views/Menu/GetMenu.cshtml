@@ -3,7 +3,7 @@
         @foreach (var item in Model)
         {
     <div class="col-sm-6 col-xs-12">
-        <form>
+        @*<form>*@
             <div class="mp-product">
                 <input type="hidden" name="productID" value="@item.Id" />
                 <a href="#" class="mp-product_img">
@@ -19,11 +19,14 @@
                         <p></p>
                     </div>
                     <div class="mp-product_price">kr @item.Price</div>
-                    <button class="btn btn-link additem" href="#" role="button">add</button>
-
+                    <div>
+                        <button class="btn btn-link subitem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">sub</button>
+                    @*<span data-count="@item.Id">1</span>*@
+                    <button class="btn btn-link additem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">add</button>
+                    </div>
                 </div>
             </div>
-        </form>
+        @*</form>*@
     </div>
         }
     
