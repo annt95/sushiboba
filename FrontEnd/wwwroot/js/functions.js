@@ -109,7 +109,7 @@ $(window).bind('scroll', function() {
 	$(document).ready(function () {
 		navInit();
 		// for modal
-		$('.button-test-modal').click(function () {
+		$('.button-modal').click(function () {
 			$('.cs-modal').fadeIn(300);
 			$('body').addClass('.cs-modal--open');
 		});
