@@ -1,0 +1,17 @@
+﻿@model List<FrontEnd.Models.Cart>
+    <div class="order-list">
+
+        @foreach (var item in Model)
+        {
+            <div class="order-list__item">
+                <div class="number">@item.Quantity</div>
+                <div class="info txt-bold">@item.Product.Name</div>
+                <div class="modal-price price">
+                    @item.Product.Price
+                    <span>kr</span>
+                </div>
+            </div>
+        }
+
+        
+    </div>

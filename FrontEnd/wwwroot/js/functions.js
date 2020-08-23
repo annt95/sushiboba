@@ -122,7 +122,7 @@ $(window).bind('scroll', function() {
 			$('.cs-modal').hide();
 		});
 		$(document).on('click', '.additem', function () {
-			debugger;
+			
 			event.preventDefault();
 			var id = $(this).data('id');
 			var price = $(this).data('price');
@@ -133,8 +133,7 @@ $(window).bind('scroll', function() {
 				type: "POST",
 				url: '/Ajax/Menu/addCart',
 				data: { id: id, price: price },
-				success: function (odata) {
-					window.location.href = odata;
+				success: function () {
 				}
 			});
 		});

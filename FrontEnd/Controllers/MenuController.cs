@@ -36,8 +36,9 @@ namespace FrontEnd.Controllers
             return View(view, data);
         }
         //ADD CART
-        public IActionResult addCart(int id,int price)
+        public void addCart(int id,int price)
         {
+            var c = 0;
             var cart = HttpContext.Session.GetString("cart");//get key cart
             if (cart == null)
             {
@@ -51,7 +52,7 @@ namespace FrontEnd.Controllers
                    }
                };
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(listCart));
-
+                c = 1;
             }
             else
             {
@@ -73,12 +74,12 @@ namespace FrontEnd.Controllers
                         Quantity = 1
                     });
                 }
+                c = 1;
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(dataCart));
                 // var cart2 = HttpContext.Session.GetString("cart");//get key cart
                 //  return Json(cart2);
             }
 
-            return View();
 
         }
         public IActionResult ListCart()
@@ -94,6 +95,20 @@ namespace FrontEnd.Controllers
                 }
             }
             return RedirectToAction(nameof(Index));
+        }
+        public ActionResult ListCartItem()
+        {
+            var cart = HttpContext.Session.GetString("cart");//get key cart
+            if (cart != null)
+            {
+                List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
+                if (dataCart.Count > 0)
+                {
+                    ViewBag.carts = dataCart;
+                    return PartialView("~/Views/Menu/GetOrder.cshtml",dataCart);
+                }
+            }
+            return PartialView("~/Views/Menu/GetOrder.cshtml",null);
         }
         [HttpPost]
         public IActionResult updateCart(int id, int quantity)
