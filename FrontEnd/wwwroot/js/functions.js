@@ -133,7 +133,10 @@ $(window).bind('scroll', function() {
 				type: "POST",
 				url: '/Ajax/Menu/addCart',
 				data: { id: id, price: price },
-				success: function () {
+				success: function (odata) {
+					debugger;
+					document.getElementById("coutCart").textContent = odata; 
+
 				}
 			});
 		});

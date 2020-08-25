@@ -1,32 +1,29 @@
-﻿
-    
-        @foreach (var item in Model)
-        {
+﻿@foreach (var item in Model)
+{
     <div class="col-sm-6 col-xs-12">
         @*<form>*@
-            <div class="mp-product">
-                <input type="hidden" name="productID" value="@item.Id" />
-                <a href="#" class="mp-product_img">
-                    <img src="~/img/@item.Images" alt="" />
-                </a>
-                <div class="mp-product_info">
-                    <div class="mp-product_code"></div>
-                    <h3 class="mp-product_name">
-                        <a  class="hvr-icon-wobble-horizontal">@item.Name</a>
-                    </h3>
-                    <div class="mp-product_text">
-                        <p>@item.Description</p>
-                        <p></p>
-                    </div>
-                    <div class="mp-product_price">kr @item.Price</div>
-                    <div>
-                        <button class="btn btn-link subitem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">sub</button>
+        <div class="mp-product">
+            <input type="hidden" name="productID" value="@item.Id" />
+            <a href="#" class="mp-product_img">
+                <img src="~/img/@item.Images" alt="" />
+            </a>
+            <div class="mp-product_info">
+                <div class="mp-product_code"></div>
+                <h3 class="mp-product_name">
+                    <a class="hvr-icon-wobble-horizontal">@item.Name</a>
+                </h3>
+                <div class="mp-product_text">
+                    <p>@item.Description</p>
+                    <p></p>
+                </div>
+                <div class="mp-product_price">kr @item.Price</div>
+                <div>
+                    <button class="btn btn-link subitem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">sub</button>
                     @*<span data-count="@item.Id">1</span>*@
                     <button class="btn btn-link additem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">add</button>
-                    </div>
                 </div>
             </div>
+        </div>
         @*</form>*@
     </div>
-        }
-    
+}
