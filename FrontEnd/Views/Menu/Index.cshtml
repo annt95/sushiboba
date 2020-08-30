@@ -348,7 +348,8 @@
                                     </svg>
                                 </span>
                             </div>
-                            @Html.Action("ListCartItem", "Menu")
+                            <span id="dtItem"></span>
+                            @*@Html.Action("ListCartItem", "Menu")*@
 
                             
 
@@ -356,11 +357,11 @@
                         <div class="order-right__bottom">
                             <div class="order-total-list">
                                 <div class="text">
-                                    Tổng cộng <span class="txt-bold">3</span> phần
+                                    Total: <span class="txt-bold" id="cCart">3</span> 
                                 </div>
                                 <div class="modal-price txt-bold">
                                     20.000
-                                    <span>đ</span>
+                                    <span>Kr</span>
                                 </div>
                             </div>
                             @*<div class="order-code  order-bg">

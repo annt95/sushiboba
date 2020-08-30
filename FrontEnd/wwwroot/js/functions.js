@@ -110,8 +110,25 @@ $(window).bind('scroll', function() {
 		navInit();
 		// for modal
 		$('.button-modal').click(function () {
-			$('.cs-modal').fadeIn(300);
-			$('body').addClass('.cs-modal--open');
+			
+
+			$.ajax({
+				type: "GET",
+				url: '/Ajax/Menu/ListStringItem',
+				success: function (odata) {
+					if (odata == null) {
+						alert('Your cart is empty');
+					} else {
+						//$("span").removeData("dtItem");
+						$('#dtItem').empty();
+						$("#dtItem").append(odata);
+						$('body').addClass('.cs-modal--open');
+						$('.cs-modal').fadeIn(300);
+					}
+					
+				}
+			});
+			
 		});
 		$('.cs-modal').click(function (e) {
 			if (e.target != this) return;
@@ -121,8 +138,7 @@ $(window).bind('scroll', function() {
 			e.preventDefault();
 			$('.cs-modal').hide();
 		});
-		$(document).on('click', '.additem', function () {
-			
+		$(document).on('click', '.additem', function () {			
 			event.preventDefault();
 			var id = $(this).data('id');
 			var price = $(this).data('price');
@@ -136,6 +152,7 @@ $(window).bind('scroll', function() {
 				success: function (odata) {
 					debugger;
 					document.getElementById("coutCart").textContent = odata; 
+					document.getElementById("cCart").textContent = odata; 
 
 				}
 			});

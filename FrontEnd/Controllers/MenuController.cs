@@ -113,6 +113,52 @@ namespace FrontEnd.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public string ListStringItem()
+        {
+            string odata = "<div class=\"order-list\">";
+            
+            var cart = HttpContext.Session.GetString("cart");//get key cart
+            if (cart != null)
+            {
+                List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
+                if (dataCart.Count > 0)
+                {
+                    ViewBag.carts = dataCart;
+                    foreach (var item in dataCart)
+                    {
+                        odata += "<div class=\"order-list__item\">";
+                        odata += "<div class=\"number\">";
+                        odata += item.Quantity + "</div>";
+                        odata += "<div class=\"info txt-bold\">";
+                        odata += item.Product.Name + " </div>";
+                        odata += "<div class=\"modal-price price\">";
+                        odata += item.Product.Price + "<span> kr</span>";
+                        odata += "</div></div>";               
+
+                    }
+                    odata += "</div>";
+                    return odata;
+                }
+            }
+            return null;
+        }
+        [HttpGet]
+        public List<Cart> ListItem()
+        {
+            var cart = HttpContext.Session.GetString("cart");//get key cart
+            if (cart != null)
+            {
+                List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
+                if (dataCart.Count > 0)
+                {
+                    ViewBag.carts = dataCart;
+                    return dataCart.ToList();
+                }
+            }
+            return null;
+        }
+        [HttpGet]
         public ActionResult ListCartItem()
         {
             var cart = HttpContext.Session.GetString("cart");//get key cart
