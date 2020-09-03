@@ -36,10 +36,11 @@ namespace FrontEnd.Controllers
             return View(view, data);
         }
         //ADD CART
-        public int addCart(int id,int price)
+        public CartModel addCart(int id,int price)
         {
-            var count = 0;
+            var p = 0;
             var cart = HttpContext.Session.GetString("cart");//get key cart
+            var cModel = new CartModel();
             if (cart == null)
             {
                 var product = getDetailProduct(id);
@@ -52,8 +53,9 @@ namespace FrontEnd.Controllers
                    }
                };
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(listCart));
-                count = 1;
-                return count;
+                cModel.count = 1;
+                cModel.totalPrice = product.Price;
+                return cModel;
             }
             else
             {
@@ -78,14 +80,48 @@ namespace FrontEnd.Controllers
                 }
                 foreach (var item in dataCart)
                 {
-                    count += item.Quantity;
+                    cModel.count += item.Quantity;
+                    
+                    p += Int32.Parse(item.Product.Price);
                 }
+                cModel.totalPrice = p.ToString();
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(dataCart));
                 // var cart2 = HttpContext.Session.GetString("cart");//get key cart
-                 return count;
+                 return cModel;
             }
+        }
+        [HttpGet]
+        public CartModel checkCart()
+        {
+            var p = 0;
+            var cart = HttpContext.Session.GetString("cart");//get key cart
+            var cModel = new CartModel();
+            if (cart == null)
+            {
+                cModel.count = 0;
+                cModel.totalPrice = 0.ToString();
+                return cModel;
+            }
+            else
+            {
+                List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
+                bool check = true;
+                foreach (var item in dataCart)
+                {
+                    cModel.count += item.Quantity;
 
-
+                    p += Int32.Parse(item.Product.Price);
+                }
+                cModel.totalPrice = p.ToString();
+                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(dataCart));
+                // var cart2 = HttpContext.Session.GetString("cart");//get key cart
+                return cModel;
+            }
+        }
+        public class CartModel
+        {
+            public int count { get; set; }
+            public string totalPrice { get; set; }
         }
         public void UpdateCartItem()
         {

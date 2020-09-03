@@ -11,19 +11,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Css -->
-    @*<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/style.css" />*@
+    
     <style>
         html {
             scroll-behavior: smooth;
         }
     </style>
+    <script type="text/javascript">
+        function checkCart() {
+            $.ajax({
+				type: "GET",
+				url: '/Ajax/Menu/checkCart',
+				success: function (odata) {
+					debugger;
+					document.getElementById("coutCart").textContent = odata.count; 
+					document.getElementById("cCart").textContent = odata.count; 
+					document.getElementById("ttPrice").textContent = odata.totalPrice; 
 
+				}
+			});
+        }
+        window.onload = checkCart;
+    </script>
 </head>
 <body>
-
 
     <main id="menu-page">
         <header class="mp-header">
@@ -182,7 +193,7 @@
             </div>
             <div class="row">
                 @Html.Partial("~/Views/Menu/GetMenu.cshtml", Model.Where(a => a.CateID == 13).OrderByDescending(s => s.Ishot))
-                
+
             </div>
         </div>
         <div class="mp-body">
@@ -260,13 +271,13 @@
                 </a>
                 <div class="cs-modal__header">
                     <span>Xác nhận đơn hàng</span>
-                    <a href="#" class="cs-modal-continue">
+                    @*<a href="#" class="cs-modal-continue">
                         Đặt hàng
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z" />
                             <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5H11a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z" />
                         </svg>
-                    </a>
+                    </a>*@
                 </div>
                 <div class="cs-modal__body cs-modal--order">
                     <div class="order-left">
@@ -274,11 +285,11 @@
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d518.6453288707797!2d106.70943193402515!3d10.725444211914423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f92f2238d15%3A0xee48ee44eab49cc!2zxJDhurduZyDEkOG7qWMgVGh14bqtdCwgVMOibiBQaG9uZywgUXXhuq1uIDcsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1596360521019!5m2!1svi!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                         </div>
                         @*<div class="order-tab">
-                            <div class="order-tab__list">
-                                <a href="#" class="active">Giao hàng</a>
-                                <a href="#">Tự đến lấy</a>
-                            </div>
-                        </div>*@
+                                <div class="order-tab__list">
+                                    <a href="#" class="active">Giao hàng</a>
+                                    <a href="#">Tự đến lấy</a>
+                                </div>
+                            </div>*@
                         <div class="order-tab-content">
                             <!-- <div class="order-tab__box">
                                 <div class="order-direction">
@@ -304,38 +315,43 @@
                             </div> -->
                             <div class="order-tab__box">
                                 <div class="order-pickup">
-                                    <div class="info-res">
-                                        <div class="name">A Mìn Quán - Ẩm Thực Trung Hoa - Hà Huy Tập</div>
-                                        <div class="address">8 - 1B Hà Huy Tập, KP. Mỹ An, P. Tân Phong, Quận 7, TP. HCM</div>
+                                    @*<div class="info-res">*@
+                                    <div>
+                                        <div class="name">
+                                            <input class="form-control" type="text" id="fname" name="fname" placeholder="Your name is...">
+                                        </div>
+                                        <div class="address">
+                                            <input class="form-control" type="text" id="fphone" name="fphone" placeholder="Your phone number is...">
+                                        </div>
                                     </div>
                                     <div class="info-user">
-                                        <div class="info-user__item">
+                                        @*<div class="info-user__item">
                                             <span>
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M2 3a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3zm6 7a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 11.825 10.623 11 8 11s-4.146.826-5 1.755V13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z" />
                                                 </svg>
                                             </span>
                                             Vinh Tran - 0386562561
-                                        </div>
+                                        </div>*@
                                         <div class="info-user__item">
                                             <span>
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
                                                 </svg>
                                             </span>
-                                            Dự kiến: 18:50 - 02/08
+                                            Estimated time: 17 mins
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="change-info">
+                            @*<div class="change-info">
                                 <span>Thay đổi thông tin nhận hàng	</span>
                                 <span>
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                                     </svg>
                                 </span>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="order-right">
@@ -351,36 +367,36 @@
                             <span id="dtItem"></span>
                             @*@Html.Action("ListCartItem", "Menu")*@
 
-                            
+
 
                         </div>
                         <div class="order-right__bottom">
                             <div class="order-total-list">
                                 <div class="text">
-                                    Total: <span class="txt-bold" id="cCart">3</span> 
+                                    Total: <span class="txt-bold" id="cCart">3</span>
                                 </div>
-                                <div class="modal-price txt-bold">
+                                <div class="modal-price txt-bold" id="ttPrice">
                                     20.000
                                     <span>Kr</span>
                                 </div>
                             </div>
                             @*<div class="order-code  order-bg">
-                                <div class="order-code__left">
-                                    <div class="text">Mã khuyến mãi</div>
-                                    <input type="text" name="" id="" class="input-code" placeholder="NHẬP MÃ">
-                                    <button class="button">Áp dụng</button>
-                                </div>
-                                <div class="order-code__right">
-                                    <div class="order__more">
-                                        <span class="txt-blue">View my code</span>
-                                        <i>
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
-                                            </svg>
-                                        </i>
+                                    <div class="order-code__left">
+                                        <div class="text">Mã khuyến mãi</div>
+                                        <input type="text" name="" id="" class="input-code" placeholder="NHẬP MÃ">
+                                        <button class="button">Áp dụng</button>
                                     </div>
-                                </div>
-                            </div>*@
+                                    <div class="order-code__right">
+                                        <div class="order__more">
+                                            <span class="txt-blue">View my code</span>
+                                            <i>
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                                                </svg>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>*@
                             <div class="order-total">
                                 <div class="text txt-bold">Tổng cộng</div>
                                 <div class="modal-price txt-bold">
@@ -389,7 +405,7 @@
                                 </div>
                             </div>
                             <div class="order-payment order-bg">
-                                <div class="text txt-bold">Ví Airpay</div>
+                                @*<div class="text txt-bold">Ví Airpay</div>
                                 <div class="order__more">
                                     <span class="txt-blue">Thay đổi</span>
                                     <i>
@@ -397,14 +413,14 @@
                                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
                                         </svg>
                                     </i>
-                                </div>
+                                </div>*@
                             </div>
                             <div class="order-note">
-                                <input type="text" placeholder="Ví dụ: No onion, no spice...">
+                                <input type="text" placeholder="Example: No onion, no spice...">
                             </div>
                             @*<div class="order-vat">
-                                <div class="text">Không xuất hoá đơn VAT</div>
-                            </div>*@
+                                    <div class="text">Không xuất hoá đơn VAT</div>
+                                </div>*@
                         </div>
                     </div>
                 </div>
@@ -418,10 +434,10 @@
                             </svg>
                         </i>
                     </div>
-                    <div class="total-price modal-price">
+                    @*<div class="total-price modal-price">
                         239.000
                         <span>đ</span>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>

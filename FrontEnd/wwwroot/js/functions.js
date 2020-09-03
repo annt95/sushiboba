@@ -110,8 +110,6 @@ $(window).bind('scroll', function() {
 		navInit();
 		// for modal
 		$('.button-modal').click(function () {
-			
-
 			$.ajax({
 				type: "GET",
 				url: '/Ajax/Menu/ListStringItem',
@@ -120,12 +118,22 @@ $(window).bind('scroll', function() {
 						alert('Your cart is empty');
 					} else {
 						//$("span").removeData("dtItem");
+						$.ajax({
+							type: "GET",
+							url: '/Ajax/Menu/checkCart',
+							success: function (odata) {
+								debugger;
+								document.getElementById("coutCart").textContent = odata.count;
+								document.getElementById("cCart").textContent = odata.count;
+								document.getElementById("ttPrice").textContent = odata.totalPrice + ' Kr';
+
+							}
+						});
 						$('#dtItem').empty();
 						$("#dtItem").append(odata);
 						$('body').addClass('.cs-modal--open');
 						$('.cs-modal').fadeIn(300);
-					}
-					
+					}					
 				}
 			});
 			
@@ -138,6 +146,7 @@ $(window).bind('scroll', function() {
 			e.preventDefault();
 			$('.cs-modal').hide();
 		});
+		
 		$(document).on('click', '.additem', function () {			
 			event.preventDefault();
 			var id = $(this).data('id');
@@ -151,8 +160,9 @@ $(window).bind('scroll', function() {
 				data: { id: id, price: price },
 				success: function (odata) {
 					debugger;
-					document.getElementById("coutCart").textContent = odata; 
-					document.getElementById("cCart").textContent = odata; 
+					document.getElementById("coutCart").textContent = odata.count; 
+					document.getElementById("cCart").textContent = odata.count; 
+					document.getElementById("ttPrice").textContent = odata.totalPrice; 
 
 				}
 			});
