@@ -122,7 +122,6 @@ $(window).bind('scroll', function() {
 							type: "GET",
 							url: '/Ajax/Menu/checkCart',
 							success: function (odata) {
-								debugger;
 								document.getElementById("coutCart").textContent = odata.count;
 								document.getElementById("cCart").textContent = odata.count;
 								document.getElementById("ttPrice").textContent = odata.totalPrice + ' Kr';
@@ -146,7 +145,43 @@ $(window).bind('scroll', function() {
 			e.preventDefault();
 			$('.cs-modal').hide();
 		});
-		
+		jQuery.validator.addMethod("rgphone", function (value, element) {
+			return this.optional(element) || /^(098|095|097|096|090|093|091|094|092|099|086|088|089|087|039|038|037|036|035|034|033|032|070|079|077|076|078|084|081|082|083|085|052|056|058|059)[0-9]{7}$/.test(value);
+		}, "phonenumber incorrect");
+		function getFormData($form) {
+			var unindexed_array = $form.serializeArray();
+			var indexed_array = {};
+
+			$.map(unindexed_array, function (n, i) {
+				indexed_array[n['name']] = n['value'];
+			});
+
+			return indexed_array;
+		}
+		$('.btnSubmitOrder').click(function (e) {
+			e.preventDefault();
+			if ($("#frmOrder").valid() == true) {
+				debugger;
+				var data = getFormData($("#frmOrder"));
+				$.ajax({
+					type: "POST",
+					url: '/dich-vu/Ajax/Detail/CheckInfoCus',
+					data: data,
+					success: function (odata) {
+						if (odata.errorcode != 0) {
+							
+						}
+						else {
+							
+
+
+						}
+					}
+
+				});
+
+			}
+					 });
 		$(document).on('click', '.additem', function () {			
 			event.preventDefault();
 			var id = $(this).data('id');
@@ -159,7 +194,6 @@ $(window).bind('scroll', function() {
 				url: '/Ajax/Menu/addCart',
 				data: { id: id, price: price },
 				success: function (odata) {
-					debugger;
 					document.getElementById("coutCart").textContent = odata.count; 
 					document.getElementById("cCart").textContent = odata.count; 
 					document.getElementById("ttPrice").textContent = odata.totalPrice; 
@@ -167,7 +201,23 @@ $(window).bind('scroll', function() {
 				}
 			});
 		});
-
+		$("#frmOrder").validate({
+			rules: {
+				fphone: { required: true, number: true, rgphone: true, minlength: 9 },
+				fname: { required: true, minlength: 2 }
+			},
+			messages: {
+				fphone: { required: "Input your phonenumber", number: "Number only" },
+				fname: { required: "Input your name", minlength: "Too short" }
+			},
+			submitHandler: function () {
+				//$('.btnCheckInfoCus').attr('disabled', true);
+				//var CustomerID = $('#CustomerID').val();
+				//var CustomerPhone = $('#CustomerPhone').val();
+				//var ProviderCode = $("#slcProviderCode option:selected").val();
+				return false;
+			}
+		});
 
 	});
 })(window.jQuery);

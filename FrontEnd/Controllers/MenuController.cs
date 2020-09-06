@@ -118,6 +118,15 @@ namespace FrontEnd.Controllers
                 return cModel;
             }
         }
+        [HttpGet]
+        public int checkDistace(double llat, double llong)
+        {
+            // boba 59.9112227,10.7463083
+            // 009 10.7254846,106.7106487
+
+            return 1;
+
+        }
         public class CartModel
         {
             public int count { get; set; }
