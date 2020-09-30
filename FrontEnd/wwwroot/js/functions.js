@@ -33,6 +33,13 @@ function navInit() {
 		$(this).toggleClass('active');
 		$('.mp-menu-mb').slideToggle();
 	});
+
+	function initialize() {
+		var input = document.getElementById('location');
+		new google.maps.places.Autocomplete(input);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 $(window).scroll(function() {
@@ -109,6 +116,36 @@ $(window).bind('scroll', function() {
 	$(document).ready(function () {
 		navInit();
 		// for modal
+		$('input[type=radio][name=optdeli]').change(function () {
+			if (this.value == 'Pickup') {
+				debugger;
+				let sumprice = document.getElementById("ttPrice").innerHTML.split(' ')[0];
+				document.getElementById('order-fee').style.visibility = "hidden";
+				document.getElementById('location').style.display = 'none';
+				document.getElementById("totalcheckout").textContent = sumprice + ' Kr'; 
+			}
+			else if (this.value == 'Ship') {
+				let sumprice = document.getElementById("ttPrice").innerHTML.split(' ')[0];
+				document.getElementById('order-fee').style.visibility = "";
+				document.getElementById('location').style.display = 'block';
+				document.getElementById("totalcheckout").textContent = parseInt(sumprice) + 249 + ' Kr'; 
+			}
+		});
+		function checkDeli() {
+
+			if (document.getElementById('optionsPickup').checked) {
+				let sumprice = document.getElementById("ttPrice").innerHTML.split(' ')[0];
+				document.getElementById('order-fee').style.visibility = "hidden";
+				document.getElementById('location').style.display = 'none';
+				document.getElementById("totalcheckout").textContent = sumprice + ' Kr'; 
+			}
+			else {
+				let sumprice = document.getElementById("ttPrice").innerHTML.split(' ')[0];
+				document.getElementById('order-fee').style.visibility = "";
+				document.getElementById('location').style.display = 'block';
+				document.getElementById("totalcheckout").textContent = parseInt(sumprice) + 249 + ' Kr'; 
+			}
+		}
 		$('.button-modal').click(function () {
 			$.ajax({
 				type: "GET",
@@ -125,13 +162,15 @@ $(window).bind('scroll', function() {
 								document.getElementById("coutCart").textContent = odata.count;
 								document.getElementById("cCart").textContent = odata.count;
 								document.getElementById("ttPrice").textContent = odata.totalPrice + ' Kr';
-
+								checkDeli();
 							}
 						});
 						$('#dtItem').empty();
 						$("#dtItem").append(odata);
 						$('body').addClass('.cs-modal--open');
 						$('.cs-modal').fadeIn(300);
+						checkDeli();
+						//document.getElementById("optionsRadios1").checked = true;
 					}					
 				}
 			});
@@ -146,12 +185,11 @@ $(window).bind('scroll', function() {
 			$('.cs-modal').hide();
 		});
 		jQuery.validator.addMethod("rgphone", function (value, element) {
-			return this.optional(element) || /^(098|095|097|096|090|093|091|094|092|099|086|088|089|087|039|038|037|036|035|034|033|032|070|079|077|076|078|084|081|082|083|085|052|056|058|059)[0-9]{7}$/.test(value);
+			return this.optional(element) || /^[0-9]/.test(value);
 		}, "phonenumber incorrect");
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
-
 			$.map(unindexed_array, function (n, i) {
 				indexed_array[n['name']] = n['value'];
 			});
@@ -161,20 +199,23 @@ $(window).bind('scroll', function() {
 		$('.btnSubmitOrder').click(function (e) {
 			e.preventDefault();
 			if ($("#frmOrder").valid() == true) {
-				debugger;
 				var data = getFormData($("#frmOrder"));
-				$.ajax({
+				if (data.optdeli == "Ship" && data.location.trim() == "") {
+					alert('Please fill your location');
+					return;
+				}
+				debugger;
+				$.ajax({					
 					type: "POST",
-					url: '/dich-vu/Ajax/Detail/CheckInfoCus',
+					url: '/Ajax/Menu/AddOrder',
 					data: data,
 					success: function (odata) {
-						if (odata.errorcode != 0) {
-							
+						debugger;
+						if (odata.errorcode == 0) {
+							window.location.href = "/Order/" + odata.msg;
 						}
 						else {
-							
-
-
+							alert(odata.msg);
 						}
 					}
 
@@ -201,9 +242,23 @@ $(window).bind('scroll', function() {
 				}
 			});
 		});
+		$(document).on('click', '.subitem', function () {
+			event.preventDefault();
+			var id = $(this).data('id');
+			$.ajax({
+				type: "POST",
+				url: '/Ajax/Menu/deleteItemCart',
+				data: { id: id},
+				success: function (odata) {
+					document.getElementById("coutCart").textContent = odata.count;
+					document.getElementById("cCart").textContent = odata.count;
+					document.getElementById("ttPrice").textContent = odata.totalPrice; 
+				}
+			});
+		});
 		$("#frmOrder").validate({
 			rules: {
-				fphone: { required: true, number: true, rgphone: true, minlength: 9 },
+				fphone: { required: true, number: true, rgphone: true, minlength: 5 },
 				fname: { required: true, minlength: 2 }
 			},
 			messages: {
@@ -218,6 +273,7 @@ $(window).bind('scroll', function() {
 				return false;
 			}
 		});
+
 
 	});
 })(window.jQuery);
