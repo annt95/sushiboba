@@ -27,6 +27,18 @@ namespace FrontEnd.Controllers
         public IActionResult Index()
         {
             var data = bobaDA.GetListItem();
+            var cart = HttpContext.Session.GetString("cart");//get key cart
+            if (cart != null)
+            {
+                List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(cart);
+                if (dataCart.Count > 0)
+                {
+                    foreach (var item in data)
+                    {
+                        item.Count = dataCart.Where(s => s.Product.Id == item.Id).Select(s => s.Quantity).FirstOrDefault();
+                    }
+                }
+            }
             return View(data);
         }
         public Menu getDetailProduct(int id)
@@ -34,12 +46,14 @@ namespace FrontEnd.Controllers
             var data = bobaDA.GetItembyID(id);
             return data;
         }
-        public ActionResult GetMenu()
-        {
-            var view = "GetMenu";
-            var data = bobaDA.GetListItem();
-            return View(view, data);
-        }
+        //public ActionResult GetMenu()
+        //{
+        //    var view = "GetMenu";
+        //    var data = bobaDA.GetListItem();
+            
+           
+        //    return View(view, data);
+        //}
         //ADD CART
         public CartModel addCart(int id,int price)
         {
@@ -348,6 +362,7 @@ namespace FrontEnd.Controllers
                     a.ShippingTypeID = 2;
                     a.ShippingFee = "249";
                     a.Note = "Distance: " + distance.ToString() + "Km. " +a.Note;
+                    a.TotalMoney = (total + 249).ToString();
                 }
                 else
                 {

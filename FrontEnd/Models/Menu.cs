@@ -16,5 +16,6 @@ namespace FrontEnd.Models
         public bool? Ismilktea { get; set; }
         public bool? Isdelete { get; set; }
         public int CateID { get; set; }
+        public int Count { get; set; } = 0;
     }
 }

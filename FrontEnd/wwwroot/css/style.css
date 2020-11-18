@@ -5020,3 +5020,12 @@ body {
     font-weight: 500;
     padding: 6px 12px;
 }
+.mp-product_quality {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .mp-product_quality input {
+        text-align: center;
+    }

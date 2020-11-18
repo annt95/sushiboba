@@ -3,7 +3,6 @@
     ViewData["Title"] = "Menu";
 }
 @model List<FrontEnd.Models.Menu>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,13 +106,24 @@
                 type: "GET",
                 url: '/Ajax/Menu/checkCart',
                 success: function (odata) {
-
                     document.getElementById("coutCart").textContent = odata.count;
                     document.getElementById("cCart").textContent = odata.count;
                     document.getElementById("ttPrice").textContent = odata.totalPrice;
                 }
             });
         }
+        //function Cart() {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: '/Ajax/Menu/ListItem',
+        //        success: function (odata) {
+        //            debugger;
+        //           // localStorage.cart = odata;
+        //            localStorage.setItem('cart', JSON.stringify(odata));
+        //            var itemcart = JSON.parse(localStorage.getItem('cart'));
+        //        }
+        //    });
+        //}
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -137,7 +147,9 @@
             });
         }
 
+       
         window.onload = checkCart;
+        //window.onload = Cart;
         //window.onload = getLocation();
         // This example requires the Places library. Include the libraries=places
         // parameter when you first load the API. For example:
@@ -523,7 +535,7 @@
 
                                     <div class="modal-price txt-bold" id="ttPrice">
                                         20.000
-                                        
+
                                     </div>
                                 </div>
                                 @*<div class="order-code  order-bg">
@@ -543,13 +555,13 @@
                                             </div>
                                         </div>
                                     </div>*@
-                            <div class="order-fee" id="order-fee">
-                                <div class="text txt-bold">Shipping Fee:</div>
-                                <div class="modal-price txt-bold">
-                                    249
-                                    <span>kr</span>
+                                <div class="order-fee" id="order-fee">
+                                    <div class="text txt-bold">Shipping Fee:</div>
+                                    <div class="modal-price txt-bold">
+                                        249
+                                        <span>kr</span>
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="order-total">
                                     <div class="text txt-bold">Total:</div>
                                     <div class="modal-price txt-bold" id="totalcheckout">
@@ -598,7 +610,7 @@
                     </div>
                     <div class="cs-modal__footer">
                         <div class="order-submit btnSubmitOrder">
-                            Đặt hàng
+                            Submit
                             <i>
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8.146 4.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 8 8.146 5.354a.5.5 0 0 1 0-.708z" />

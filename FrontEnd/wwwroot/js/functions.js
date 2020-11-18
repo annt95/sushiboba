@@ -227,6 +227,11 @@ $(window).bind('scroll', function() {
 			event.preventDefault();
 			var id = $(this).data('id');
 			var price = $(this).data('price');
+			var oldvalue = $('input[data-id="' + id + '"]').val();
+			var newvalue = (parseInt(oldvalue) + 1).toString();
+			document.getElementById(id).value = newvalue;
+
+			//$('#' + id + '').value = newvalue;
 			//var price = Number($(this).data('price'));
 			//var id = 16;
 			var count = 1;
@@ -245,6 +250,7 @@ $(window).bind('scroll', function() {
 		$(document).on('click', '.subitem', function () {
 			event.preventDefault();
 			var id = $(this).data('id');
+			document.getElementById(id).value = "0";
 			$.ajax({
 				type: "POST",
 				url: '/Ajax/Menu/deleteItemCart',

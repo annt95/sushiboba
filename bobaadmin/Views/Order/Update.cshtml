@@ -13,8 +13,8 @@
         OrderID: @ViewBag.OrderID
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li><a href="/Order">Order</a></li>
+        <li><a href="~/"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li><a href="~/Order">Order</a></li>
         <li class="active">Details</li>
     </ol>
 </section>
@@ -28,6 +28,7 @@
                 CustomerPhone: @ViewBag.CustomerPhone<br>
                 TotalMoney: @ViewBag.TotalMoney<br>
                 ShippingType: @ViewBag.ShippingType<br>
+                Destination: @ViewBag.Address<br>
                 Note: @ViewBag.Note<br>
                 <br />
             </div>

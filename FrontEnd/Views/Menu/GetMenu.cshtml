@@ -1,8 +1,9 @@
-﻿@foreach (var item in Model)
+﻿@using Newtonsoft.Json;
+@foreach (var item in Model)
 {
     <div class="col-sm-6 col-xs-12">
-        @*<form>*@
-        <div class="mp-product">
+       
+        <div class="mp-product" data-id="@item.Id">
             <input type="hidden" name="productID" value="@item.Id" />
             <a href="#" class="mp-product_img">
                 <img src="~/img/@item.Images" alt="" />
@@ -17,9 +18,9 @@
                     <p></p>
                 </div>
                 <div class="mp-product_price">kr @item.Price</div>
-                <div>
-                    <button class="btn btn-link subitem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">sub</button>
-                    @*<span data-count="@item.Id">1</span>*@
+                <div class="mp-product_quality">
+                    <button class="btn btn-link subitem pull-left" data-id="@item.Id" data-price="@item.Price" href="#" style="margin-right:5px"  role="button">sub</button>
+                    <input class="numberitem pull-left" type="text" id="@item.Id" data-id="@item.Id" style="width:30px;margin-right:5px" readonly="readonly" value="@item.Count" placeholder="0">
                     <button class="btn btn-link additem" data-id="@item.Id" data-price="@item.Price" href="#" role="button">add</button>
                 </div>
             </div>

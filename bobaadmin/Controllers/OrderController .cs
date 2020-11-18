@@ -48,6 +48,7 @@ namespace bobaadmin
             ViewBag.Note = dataOrder.Note;
             ViewBag.ShippingType = dataOrder.ShippingType;
             ViewBag.StatusID = dataOrder.StatusID;
+            ViewBag.Address = dataOrder.Address;
             dataItem.items = bobaDA.GetListOrderItembyId(id);
             return View(dataItem);
         }
